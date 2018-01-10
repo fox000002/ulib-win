@@ -332,7 +332,7 @@ LRESULT newWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     
 
     //LOG_STRING("xxxx_WM_COMMAND");
-    if (hwnd == g_hWnd || hwnd == g_hWndMain || hwnd == g_hWndMainMenuBar || hwnd == g_hWndMainToolBar
+    if (hwnd == g_hWndLogin || hwnd == g_hWndMain || hwnd == g_hWndMainMenuBar || hwnd == g_hWndMainToolBar
         || hwnd == g_hWndOpen || hwnd == g_hWndImport)
     {
         if (uMsg == WM_COMMAND)
@@ -352,6 +352,11 @@ LRESULT newWndProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
                         if (g_hWndLogin!=NULL && hwnd == g_hWndLogin)
                         {
                             wsprintf(msgContent, "%d", (int)hwnd);
+                            SendCopyDataMessage(g_hMsgWnd, msgContent, WM_COPYDATA_MESSAGE_ID_CLOSE);
+                        }
+                        else if (g_hWndOpen != NULL && hwnd == g_hWndOpen)
+                        {
+                            wsprintf(msgContent, "Open Window %d", (int)hwnd);
                             SendCopyDataMessage(g_hMsgWnd, msgContent, WM_COPYDATA_MESSAGE_ID_CLOSE);
                         }
                     }

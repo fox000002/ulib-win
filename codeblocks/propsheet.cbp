@@ -7,28 +7,28 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin\Debug\propsheet" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Debug\" />
+				<Option output="bin/Debug/propsheet" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-DBUILD_EXE" />
 					<Add option="-DHU_DEBUG" />
-					<Add directory="..\inc" />
+					<Add directory="../inc" />
 				</Compiler>
 				<ResourceCompiler>
-					<Add directory="..\res" />
-					<Add directory="..\ico" />
+					<Add directory="../res" />
+					<Add directory="../ico" />
 				</ResourceCompiler>
 				<Linker>
 					<Add library="uwin" />
-					<Add directory="bin\debug" />
+					<Add directory="bin/debug" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin\Release\propsheet" prefix_auto="1" extension_auto="1" />
-				<Option object_output="obj\Release\" />
+				<Option output="bin/Release/propsheet" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -49,12 +49,12 @@
 			<Add library="kernel32" />
 			<Add library="comctl32" />
 		</Linker>
-		<Unit filename="..\demo\propsheet\propsheet.rc">
+		<Unit filename="../demo/propsheet/propsheet.rc">
 			<Option compilerVar="WINDRES" />
 			<Option compiler="gcc" use="1" buildCommand="$rescomp -i $file -J rc -o $resource_output -O coff $res_includes -DMINGW_RC" />
 		</Unit>
-		<Unit filename="..\demo\propsheet\resource.h" />
-		<Unit filename="..\demo\propsheet\test_propsheet.cpp" />
+		<Unit filename="../demo/propsheet/resource.h" />
+		<Unit filename="../demo/propsheet/test_propsheet.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

@@ -14,7 +14,6 @@ LPCTSTR ClientChildWndClass = _T("UClientChildWindow_{B7434340-E3F8-4b53-B576-CB
 
 LRESULT CALLBACK DefaultClientChildWindowProc(HWND hWnd, UINT uMessage, WPARAM wParam, LPARAM lParam)
 {
-
     UBaseWindow *pBaseWnd = 0;
 
     if (uMessage == WM_NCCREATE)
@@ -99,13 +98,13 @@ public:
         return 0;
     }
 
-    virtual BOOL onPreRegisterWindowClass(huys::UWindowClass &uwc)
+    virtual LRESULT onPreRegisterWindowClass(huys::UWindowClass &uwc)
     {
         uwc.setProcdure(&DefaultClientChildWindowProc);
         return FALSE;
     }
 
-    virtual BOOL defaultMessageHandler(UINT uMessage, WPARAM wParam, LPARAM lParam)
+    virtual LRESULT defaultMessageHandler(UINT uMessage, WPARAM wParam, LPARAM lParam)
     {
         return ::DefMDIChildProc(*this, uMessage, wParam, lParam);
     }
@@ -272,7 +271,7 @@ public:
         CHECK_PTR(m_pClientWindow);
     }
 
-    virtual BOOL onPreRegisterWindowClass(huys::UWindowClass &uwc)
+    virtual LRESULT onPreRegisterWindowClass(huys::UWindowClass &uwc)
     {
         uwc.setProcdure(&DefaultFrameWindowProc);
         uwc.setBKBrush((HBRUSH) (COLOR_APPWORKSPACE + 1));
@@ -325,7 +324,7 @@ public:
     HWND getClientHWnd() const
     { return m_pClientWindow->getHandle(); }
 
-    virtual BOOL defaultMessageHandler(UINT uMessage, WPARAM wParam, LPARAM lParam)
+    virtual LRESULT defaultMessageHandler(UINT uMessage, WPARAM wParam, LPARAM lParam)
     {
         HWND hClient = ::GetWindow(*this, GW_CHILD);
         return ::DefFrameProc(*this, hClient, uMessage, wParam, lParam) ;

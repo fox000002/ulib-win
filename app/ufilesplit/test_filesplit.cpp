@@ -15,12 +15,12 @@
 #include "uedit.h"
 #include "ulistview.h"
 #include "ucombobox.h"
-#include "adt/uautoptr.h"
-#include "adt/ustring.h"
 #include "ucommondialog.h"
 #include "umsg.h"
-#include "adt/uvector.h"
 #include "uimagelist.h"
+#include "adt/uautoptr.h"
+#include "adt/ustring.h"
+#include "adt/uvector.h"
 
 #include "uthread.h"
 
@@ -70,14 +70,18 @@ public:
         this->setIconBig(IDI_HELP);
         this->setTimer(ID_TIMER_CLOCK, 1000);
 
+        m_hBrushBk = ::CreateSolidBrush(huys::skyblue);
+
         m_rbSplit = new AUI::UTransRadioButton(this, ID_RADIOBTN_SPLIT);
         m_rbSplit->setPos(120, 20, 100, 20);
+        m_rbSplit->SetHBrush(m_hBrushBk);
         m_rbSplit->create();
         m_rbSplit->setWindowText(_T("Split"));
         m_rbSplit->check();
 
         m_rbMerge = new AUI::UTransRadioButton(this, ID_RADIOBTN_MERGE);
         m_rbMerge->setPos(240, 20, 100, 20);
+        m_rbMerge->SetHBrush(m_hBrushBk);
         m_rbMerge->create();
         m_rbMerge->setWindowText(_T("Merge"));
 
@@ -341,6 +345,8 @@ private:
     huys::ADT::UAutoPtr<UComboBox> m_cbBuffer;
 
     USMode mode;
+
+    HBRUSH m_hBrushBk;
 
     huys::ADT::UVector<huys::ADT::UString<char, MAX_PATH> > fin_names;
 

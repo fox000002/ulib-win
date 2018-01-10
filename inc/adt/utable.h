@@ -80,7 +80,7 @@ public:
 
     bool inTable( const K &key ) const;
 
-    UTable<K,D,H> & add( const K &key, const D &data = 0 );
+    UTable<K,D,H> & add( const K &key, const D &data = D() );
 
     D &operator[]( const K &key );
 

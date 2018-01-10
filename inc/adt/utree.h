@@ -24,22 +24,22 @@ struct RB_node
 
 
 
-    RB_node(const Record &new_entry)
+    RB_node(const Entry &new_entry)
     {
-        color = red;
+        color = _red;
         data = new_entry;
         left = right = NULL;
     }
 
     RB_node()
     {
-        color = red;
+        color = _red;
         left = right = NULL;
     }
 
     void set_color(_Color c) { color = c; }
 
-    Color get_color() const { return color; }
+    _Color get_color() const { return color; }
 };
 
 /*
@@ -48,7 +48,6 @@ struct RB_node
 template <class TK, class TV, class TAlloc>
 class URBTree
 {
-
 public:
     URBTree()
     {
@@ -60,6 +59,25 @@ public:
 
 };
 
+/*
+ * k-d Tree
+ */
+template <class TK, class TV, class TAlloc>
+class UKDTree
+{
+public:
+	UKDTree()
+	{
+	
+	}
+	
+	~UKDTree()
+	{
+	
+	}
+};
+ 
+ 
 }; // namespace ADT
 
 }; // namespace huys

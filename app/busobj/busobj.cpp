@@ -282,6 +282,10 @@ public:
             }
             else if (wParam == 54322) // IDOK
             {
+                PCOPYDATASTRUCT pMyCDS = (PCOPYDATASTRUCT) lParam;
+                const char * content = (const char *)pMyCDS->lpData; 
+                addLines(content);
+
                 //PostMessage(m_hDlg, WM_TRY_HOOKING_MAINWINDOW, 0, 0);
                 this->setTimer(IDTIMER_TRY_HOOKING_MAINWINDOW, 100);
             }

@@ -25,18 +25,18 @@ public:
     {
         return (URadioButton::create() && this->subclassProc());
     }
-	
+
 
     /* virtual */ BOOL onCtrlColor(WPARAM wParam, LPARAM lParam)
     {
         HDC hdc = (HDC)wParam;
         ::SetBkMode(hdc, TRANSPARENT);
-		
+
 		if (m_hbrBack) return (BOOL)m_hbrBack;
-		
+
         return (BOOL)(HBRUSH)GetStockObject(NULL_BRUSH);
     }
-	
+
 	void SetHBrush(HBRUSH hbr)
 	{
 		m_hbrBack = hbr;
