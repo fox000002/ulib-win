@@ -8,7 +8,7 @@ SET(ULIB_MAJOR_VERSION 1)
 SET(ULIB_MINOR_VERSION 0)
 SET(ULIB_BUILD_VERSION 0)
 SET(ULIB_VERSION
-    "${VTK_MAJOR_VERSION}.${VTK_MINOR_VERSION}.${VTK_BUILD_VERSION}")
+    "${ULIB_MAJOR_VERSION}.${ULIB_MINOR_VERSION}.${ULIB_BUILD_VERSION}")
 
 #-----------------------------------------------------------------------------
 # Define some CMake variables for use later in the project
@@ -21,6 +21,7 @@ SET (ULIB_ICON_DIR           ${ULIB_SOURCE_DIR}/ico)
 SET (ULIB_FIX_DIR)
 IF (MSVC)
   SET (ULIB_FIX_DIR     ${ULIB_SOURCE_DIR}/vc)
+  ADD_DEFINITIONS("/DCMAKE")
 ENDIF (MSVC)
 
 #-----------------------------------------------------------------------------

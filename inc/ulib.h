@@ -171,7 +171,7 @@ inline void checked_delete(T * x)
 
 
 #if !defined(BUILD_DLL) && !defined(WITHOUT_DLL)
-  #if defined(BUILD_EXE)
+  #if defined(BUILD_EXE) && !defined(CMAKE)
     #if (_MSC_VER == 1200)  // VC6
       #if defined(_DEBUG)
         #pragma comment(lib, "libuwin_debug.vc6.dll.lib")
@@ -211,7 +211,7 @@ inline void checked_delete(T * x)
     #pragma comment(lib, "glu32.lib")
     #pragma comment(lib, "ws2_32.lib")
     //
-    #if (_MSC_VER == 1200)  // VC6
+    #if (_MSC_VER == 1200) && !defined(CMAKE) // VC6
       #pragma comment(lib, "fix/psapi.lib")
       #pragma comment(lib, "fix/iphlpapi.lib")
       #if defined(_DEBUG)
@@ -221,7 +221,7 @@ inline void checked_delete(T * x)
       #endif // _DEBUG
     #endif //  _MSC_VER == 1200
 
-    #if (_MSC_VER == 1400)  // VC8
+    #if (_MSC_VER == 1400) && !defined(CMAKE) // VC8
       #if defined(_DEBUG)
         #pragma comment(lib, "libuwin_debug.vc8.lib")
       #else
@@ -229,7 +229,7 @@ inline void checked_delete(T * x)
       #endif // _DEBUG
     #endif
 
-    #if (_MSC_VER == 1500)  // VC9
+    #if (_MSC_VER == 1500) && !defined(CMAKE) // VC9
       #if defined(_DEBUG)
         #pragma comment(lib, "libuwin_debug.vc9.lib")
       #else
@@ -237,7 +237,7 @@ inline void checked_delete(T * x)
       #endif // _DEBUG
     #endif
 
-    #if (_MSC_VER == 1600)  // VC10
+    #if (_MSC_VER == 1600) && !defined(CMAKE) // VC10
       #if defined(_DEBUG)
         #pragma comment(lib, "libuwin_debug.vc10.lib")
       #else
@@ -246,7 +246,7 @@ inline void checked_delete(T * x)
     #endif
   #endif // BUILD_EXE
 #else
-  #if (_MSC_VER == 1200)  // VC6
+  #if (_MSC_VER == 1200) && !defined(CMAKE) // VC6
     #pragma comment(lib, "fix/psapi.lib")
     #pragma comment(lib, "fix/iphlpapi.lib")
   #endif
