@@ -114,7 +114,8 @@ private:
         ULONG ulState;
 
         m_pImgCtx = NULL;
-        hr = ::CoCreateInstance( CLSID_IImgCtx, NULL, CLSCTX_INPROC_SERVER, IID_IImgCtx, (LPVOID*) &m_pImgCtx);
+        hr = ::CoCreateInstance( CLSID_IImgCtx, NULL, CLSCTX_INPROC_SERVER, 
+			IID_IImgCtx, (LPVOID*) &m_pImgCtx);
         if ( FAILED(hr) )
         {
             return FALSE;

@@ -15,9 +15,16 @@ EXTERN_C const IID CLSID_InternetExplorer;
 EXTERN_C const IID IID_IHTMLDocument2;
 #endif // _MSC_VER
 
+#ifdef  __GNUC__
+//CLSID_InternetExplorer : 0002DF01-0000-0000-C000-000000000046
+#define   INITGUID
+#include <initguid.h>
+DEFINE_GUID(CLSID_InternetExplorer, 0x0002DF01, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46);
+#endif /* __GNUC__ */
+
 //#import <shdocvw.dll>
 
-#include "shdocvw.tlh"
+//#include "shdocvw.tlh"
 
 #ifndef ASSERT
 #include <assert.h>
@@ -31,11 +38,8 @@ typedef huys::ADT::UStringAnsi TString;
 class UIExplorer
 {
 public:
-    UIExplorer()
-        :m_pWebBrowser(0)
-    {
-
-    }
+    UIExplorer() : m_pWebBrowser(0)
+    {}
 
     ~UIExplorer();
 
@@ -49,7 +53,8 @@ public:
 
         HRESULT hr;
         IWebBrowser2* pWebBrowser = NULL;
-        hr = CoCreateInstance (CLSID_InternetExplorer, NULL, CLSCTX_SERVER, IID_IWebBrowser2, (LPVOID*)&pWebBrowser);
+        hr = CoCreateInstance (CLSID_InternetExplorer, NULL, CLSCTX_SERVER,
+            IID_IWebBrowser2, (LPVOID*)&pWebBrowser);
 
         if (SUCCEEDED (hr) && (pWebBrowser != NULL))
         {
@@ -70,14 +75,13 @@ public:
     {
         if (m_pWebBrowser != NULL)
         {
-            m_pWebBrowser->Release ();
+            m_pWebBrowser->Release();
             m_pWebBrowser = NULL;
         }
 
         HRESULT hr;
         SHDocVw::IShellWindowsPtr spSHWinds;
-        hr = spSHWinds.CreateInstance
-            (__uuidof(SHDocVw::ShellWindows));
+        hr = spSHWinds.CreateInstance(__uuidof(SHDocVw::ShellWindows));
 
         if (FAILED (hr))
             return false;
@@ -94,8 +98,7 @@ public:
             spDisp = spSHWinds->Item (va);
 
             IWebBrowser2 * pWebBrowser = NULL;
-            hr = spDisp.QueryInterface (IID_IWebBrowser2, &
-                pWebBrowser);
+            hr = spDisp.QueryInterface (IID_IWebBrowser2, &pWebBrowser);
 
             if (pWebBrowser != NULL)
             {
@@ -104,15 +107,12 @@ public:
                 IHTMLDocument2 * pHtmlDoc = NULL;
 
                 // Retrieve the document object.
-                hr = pWebBrowser->get_Document
-                    (&pHtmlDocDispatch);
+                hr = pWebBrowser->get_Document(&pHtmlDocDispatch);
 
                 if (SUCCEEDED (hr) && (pHtmlDocDispatch != NULL))
                 {
                     // Query for IPersistStreamInit.
-                    hr = pHtmlDocDispatch->QueryInterface
-                        (IID_IHTMLDocument2,
-                        (void**)&pHtmlDoc);
+                    hr = pHtmlDocDispatch->QueryInterface(IID_IHTMLDocument2, (void**)&pHtmlDoc);
                     if (SUCCEEDED (hr) && (pHtmlDoc != NULL))
                     {
                         TString sTitle;
@@ -237,8 +237,7 @@ public:
         hr = m_pWebBrowser->get_Document (&pHtmlDocDispatch);
         if (SUCCEEDED (hr) && (pHtmlDocDispatch != NULL))
         {
-            hr = pHtmlDocDispatch->QueryInterface (IID_IHTMLDocument2,
-                (void**)&pHtmlDoc);
+            hr = pHtmlDocDispatch->QueryInterface (IID_IHTMLDocument2, (void**)&pHtmlDoc);
             if (SUCCEEDED (hr) && (pHtmlDoc != NULL))
             {
                 IHTMLElementCollection* pColl = NULL;
@@ -261,15 +260,13 @@ public:
 
                         if (SUCCEEDED (hr) && (pElemDispatch != NULL))
                         {
-                            hr = pElemDispatch->QueryInterface
-                                (IID_IHTMLElement, (void**)&pElem);
+                            hr = pElemDispatch->QueryInterface(IID_IHTMLElement, (void**)&pElem);
 
                             if (SUCCEEDED (hr) && (pElem != NULL))
                             {
                                 BSTR bstrTagName;
                                 CString sTempTagName;
-                                if (!FAILED (pElem->get_tagName
-                                    (&bstrTagName)))
+                                if (!FAILED (pElem->get_tagName(&bstrTagName)))
                                 {
                                     sTempTagName = bstrTagName;
                                     SysFreeString (bstrTagName);
@@ -279,13 +276,8 @@ public:
                                     sTempTagName == _T ("A"))
                                 {
                                     IHTMLAnchorElement * pAnchor = NULL;
-                                    hr = pElemDispatch->
-                                        QueryInterface(
-                                        IID_IHTMLAnchorElement,
-                                        (void**)&pAnchor);
-
-                                    if (SUCCEEDED (hr) &&
-                                        (pAnchor != NULL))
+                                    hr = pElemDispatch->QueryInterface(IID_IHTMLAnchorElement, (void**)&pAnchor);
+                                    if (SUCCEEDED (hr) && (pAnchor != NULL))
                                     {
                                         BSTR bstrName, bstrOuterText,
                                             bstrURL,
@@ -293,13 +285,10 @@ public:
                                         CString sTempName, sTempOuter,
                                             sTempURL, sTempTooltip;
 
-                                        if (!FAILED
-                                            (pElem->get_outerText
-                                            (&bstrOuterText)))
+                                        if (!FAILED(pElem->get_outerText(&bstrOuterText)))
                                         {
                                             sTempOuter = bstrOuterText;
-                                            SysFreeString
-                                                (bstrOuterText);
+                                            SysFreeString(bstrOuterText);
                                         }
                                         if (!FAILED (pElem->get_title
                                             (&bstrTooltip)))

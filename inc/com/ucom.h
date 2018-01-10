@@ -126,7 +126,7 @@ class UCoObject
 public:
     virtual void * acquireInterface (IID const & iid) = 0;
     UCoObject() { CoInitialize(); }
-    virtual ~UCoObject(){ CoUninitialize(); }
+    virtual ~UCoObject() { CoUninitialize(); }
 };
 
 class HEx
@@ -146,7 +146,7 @@ private:
 };
 
 //
-class USmartObject: public UCoObject
+class ULIB_API USmartObject: public UCoObject
 {
 public:
     USmartObject (CLSID const & classId, bool running = false);
@@ -175,6 +175,7 @@ public:
         if(_iUnk)
             _iUnk->Release ();
     }
+	
     void * acquireInterface (IID const & iid);
 /*    {
         void * p = 0;
@@ -373,7 +374,7 @@ protected:
 //
 // Type Library from exe or dll
 //
-class TypeLibrary
+class ULIB_API TypeLibrary
 {
     friend class TypeInfo;
 public:

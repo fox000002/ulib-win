@@ -17,9 +17,12 @@ int main(int argc, char **argv)
     if (!CoInitialize(0))
     {
         // Get IExample.DLL's IClassFactory
-        if ((hr = CoGetClassObject(&CLSID_IExample2, CLSCTX_INPROC_SERVER, 0, &IID_IClassFactory, &classFactory)))
+        if ((hr = CoGetClassObject(&CLSID_IExample2, CLSCTX_INPROC_SERVER, 0,
+			&IID_IClassFactory, &classFactory)))
+		{
             MessageBox(0, "Can't get IClassFactory", "CoGetClassObject error", MB_OK|MB_ICONEXCLAMATION);
-        else
+        }
+		else
         {
             // Create an IExample object
             if ((hr = classFactory->lpVtbl->CreateInstance(classFactory, 0, &IID_IExample2, &exampleObj)))

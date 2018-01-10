@@ -133,3 +133,6 @@ GDIPLUS_DIR = D:\Progs\MinGW\include\gdiplus
 #
 %.o : %.cpp $(HEADERS)
 	$(CXX) -c -o $@ $< $(CXXFLAGS) $(INCS)
+	
+%.o : %.c $(HEADERS)
+	$(CC) -c -o $@ $< $(CFLAGS) $(INCS)

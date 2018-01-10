@@ -6,14 +6,14 @@ include $(TOPDIR)/make.inc
 
 #
 CFLAGS =
-CXXFLAGS = 
+CXXFLAGS += -DBUILD_EXE
 INCS = -I"$(TOPDIR)/inc" -I.
-LIBS = -L"$(TOPDIR)/lib" -luuid -lole32 -loleaut32 -mwindows
+LIBS = -L"$(TOPDIR)/lib" -luwin
 
 
 #
-OBJ = cwebpage.o
-BIN = cwebpage.exe
+OBJ = typelib.o
+BIN = typelib.exe
 RC  = 
 RES = ${RC:.rc=.res}
 #
@@ -22,8 +22,9 @@ HEADER =
 all: $(BIN)
 
 #
-cwebpage.exe : cwebpage.o
+typelib.exe : typelib.o
 	$(CXX) -o $@ $< $(LIBS)
+	cp -vf $@ $(BINDIR)/$@
 
 
 #
@@ -31,5 +32,11 @@ $(RES) : $(RC) resource.h
 	$(WINDRES) -i $(RC) -o $(RES) -O coff -I"$(ICODIR)" -I"$(RESDIR)"
 
 #
+.PHONY : test
+test :
+	$(WINE) $(BINDIR)/$(BIN)
+	
+#
+.PHONY : clean
 clean :
 	$(RM) ${OBJ} ${RES} ${BIN}

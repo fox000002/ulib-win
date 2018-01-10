@@ -458,7 +458,7 @@ BOOL WINAPI DllMain(HINSTANCE instance, DWORD fdwReason, LPVOID lpvReserved)
     switch (fdwReason)
     {
         case DLL_PROCESS_ATTACH:
-        {
+		{
             // No TypeInfo yet loaded
             MyTypeInfo = 0;
 
@@ -480,5 +480,5 @@ BOOL WINAPI DllMain(HINSTANCE instance, DWORD fdwReason, LPVOID lpvReserved)
         }
     }
 
-    return(1);
+    return 0;
 }

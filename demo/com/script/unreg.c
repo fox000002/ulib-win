@@ -20,16 +20,12 @@ static const TCHAR    ProgIDName[] = "ProgID";
 static const TCHAR    GUID_Format[] = _T("{%08lX-%04X-%04X-%02X%02X-%02X%02X%02X%02X%02X%02X}");
 
 
-
-
-
 /************************ stringFromCLSID() ***********************
  * Converts an object's GUID (array) to an ascii string (in a special
  * format where there are groups of ascii digits separated by a dash).
  * NOTE: Using wsprintf() avoids needing to load ole32.dll just to
  * call StringFromCLSID(). We're just doing the same thing it would do.
  */
-
 static void stringFromCLSID(LPTSTR buffer, REFCLSID ri)
 {
     wsprintf(buffer, &GUID_Format[0],
@@ -39,14 +35,9 @@ static void stringFromCLSID(LPTSTR buffer, REFCLSID ri)
         ((REFCLSID)ri)->Data4[7]);
 }
 
-
-
-
-
 /************************** WinMain() ************************
  * Program Entry point
  */
-
 int WINAPI WinMain(HINSTANCE hinstExe, HINSTANCE hinstPrev, LPSTR lpszCmdLine, int nCmdShow)
 {
     int                result;
