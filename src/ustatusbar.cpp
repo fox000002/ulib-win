@@ -1,4 +1,6 @@
+#ifndef _WIN64
 #define _WIN32_IE 0x0400
+#endif
 
 #include <windows.h>
 #include <tchar.h>

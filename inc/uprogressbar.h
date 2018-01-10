@@ -42,10 +42,12 @@ protected:
 private:
 };
 
+#ifndef WIN64
 #if (_WIN32_WINNT >= 0x0501)
 #define PBS_MARQUEE             0x08
 #define PBM_SETMARQUEE          (WM_USER+10)
 #endif      // _WIN32_WINNT >= 0x0501
+#endif
 
 #endif // U_PROGRESSBAR_H
 

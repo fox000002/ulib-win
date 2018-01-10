@@ -2,11 +2,16 @@
 #include <commctrl.h>
 #include <tchar.h>
 #include <assert.h>
+#include <stdlib.h>
 #include "ubitmap.h"
 #include "udc.h"
 
 #ifndef ASSERT
 #define ASSERT assert
+#endif
+
+#ifndef min
+#define min __min
 #endif
 
 UBitmap::UBitmap()

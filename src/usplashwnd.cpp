@@ -177,7 +177,7 @@ BOOL USplashWindow::onTimer(WPARAM wParam, LPARAM lParam)
 	return FALSE;
 }
 
-BOOL USplashWindow::filterMessage(UINT uMessage, WPARAM wParam, LPARAM lParam)
+LRESULT USplashWindow::filterMessage(UINT uMessage, WPARAM wParam, LPARAM lParam)
 {
 	if ((uMessage == WM_KEYDOWN	   ||
 		 uMessage == WM_SYSKEYDOWN	   ||
@@ -234,7 +234,7 @@ bool USplashWindow::setTransparentColor(huys::Color clr)
 	return true;
 }
 
-BOOL USplashWindow::onPreRegisterWindowClass(huys::UWindowClass &uwc)
+LRESULT USplashWindow::onPreRegisterWindowClass(huys::UWindowClass &uwc)
 {
     uwc.setBKBrush((HBRUSH)::GetStockObject(WHITE_BRUSH));
     uwc.setStyles(CS_BYTEALIGNCLIENT | CS_BYTEALIGNWINDOW);

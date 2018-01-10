@@ -1,6 +1,7 @@
+#ifndef _WIN64
 #define _WIN32_WINNT 0x501
 #define  _WIN32_IE 0x0400
-
+#endif
 
 #include <windows.h>
 #include <tchar.h>
@@ -11,6 +12,8 @@
 #if !defined(_MSC_VER) || _MSC_VER <= 1200
 
 #if (_WIN32_WINNT >= 0x501)
+
+#ifndef ECM_FIRST
 #define ECM_FIRST               0x1500      // Edit control messages
 #define	EM_SETCUEBANNER	    (ECM_FIRST + 1)		// Set the cue banner with the lParm = LPCWSTR
 #define Edit_SetCueBannerText(hwnd, lpcwText) \
@@ -32,8 +35,9 @@ typedef struct _tagEDITBALLOONTIP
 #define EM_HIDEBALLOONTIP   (ECM_FIRST + 4)     // Hide any balloon tip associated with the edit control
 #define Edit_HideBalloonTip(hwnd) \
 	(BOOL)SNDMSG((hwnd), EM_HIDEBALLOONTIP, 0, 0)
-#endif
 
+#endif
+#endif
 #endif
 
 UEdit::UEdit(HWND hParent, UINT nResource, HINSTANCE hInst)

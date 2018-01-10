@@ -37,7 +37,9 @@ BOOL UButton::click()
 #ifndef BCM_FIRST
   #define BCM_FIRST               0x1600      // Button control messages
 #endif // BCM_FIRST
+#ifndef BCM_GETIDEALSIZE
   #define BCM_GETIDEALSIZE        (BCM_FIRST + 0x0001)
+#endif
 #endif
 
 BOOL UButton::getIdealSize(SIZE *pSize)
@@ -160,12 +162,14 @@ UIconButton::~UIconButton()
 #define BUTTON_IMAGELIST_ALIGN_BOTTOM   3
 #define BUTTON_IMAGELIST_ALIGN_CENTER   4       // Doesn't draw text
 
+#ifndef BCM_SETIMAGELIST
 typedef struct
 {
     HIMAGELIST  himl;   // Index: Normal, hot pushed, disabled. If count is less than 4, we use index 1
     RECT        margin; // Margin around icon.
     UINT        uAlign;
 } BUTTON_IMAGELIST, *PBUTTON_IMAGELIST;
+
 
 #define BCM_SETIMAGELIST        (BCM_FIRST + 0x0002)
 #define Button_SetImageList(hwnd, pbuttonImagelist)\
@@ -181,7 +185,9 @@ typedef struct
 #define BCM_GETTEXTMARGIN       (BCM_FIRST + 0x0005)
 #define Button_GetTextMargin(hwnd, pmargin)\
     (BOOL)SNDMSG((hwnd), BCM_GETTEXTMARGIN, 0, (LPARAM)(pmargin))
+#endif
 
+#ifndef BCN_HOTITEMCHANGE
 typedef struct tagNMBCHOTITEM
 {
     NMHDR   hdr;
@@ -189,8 +195,12 @@ typedef struct tagNMBCHOTITEM
 } NMBCHOTITEM, * LPNMBCHOTITEM;
 
 #define BCN_HOTITEMCHANGE       (BCN_FIRST + 0x0001)
+#endif
 
+#ifndef BST_HOT
 #define BST_HOT            0x0200
+#endif
+
 #endif // WINVER >= 0x0501
 #endif
 

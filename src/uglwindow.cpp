@@ -25,13 +25,13 @@ UGLWindow::UGLWindow(HINSTANCE hInst)
     m_uInterval = 100;
 }
 
-BOOL UGLWindow::onPreRegisterWindowClass(huys::UWindowClass &uwc)
+LRESULT UGLWindow::onPreRegisterWindowClass(huys::UWindowClass &uwc)
 {
     uwc.setStyles(CS_OWNDC);
     return FALSE;
 }
 
-BOOL UGLWindow::onPreCreateWindow()
+LRESULT UGLWindow::onPreCreateWindow()
 {
         if (IDYES == showYesNoMsgbox(_T("Fullscreen?"), _T("Start Fullscreen?")))
         {

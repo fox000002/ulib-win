@@ -108,12 +108,12 @@ public:
     /* !!! Default Message Handler Entry Point
      *
      */
-    virtual BOOL defaultMessageHandler(UINT uMessage, WPARAM wParam, LPARAM lParam);
+    virtual LRESULT defaultMessageHandler(UINT uMessage, WPARAM wParam, LPARAM lParam);
 
     /// If the message need be filtered, it should return TRUE;
-    virtual BOOL filterMessage(UINT uMessage, WPARAM wParam, LPARAM lParam)
+    virtual LRESULT filterMessage(UINT uMessage, WPARAM wParam, LPARAM lParam)
     { return FALSE; }
-    virtual BOOL onMessage(UINT uMessage, WPARAM wParam, LPARAM lParam);
+    virtual LRESULT onMessage(UINT uMessage, WPARAM wParam, LPARAM lParam);
     /* !!! WM_CREATE
      * If an application processes this message,
      * it should return zero to continue creation of the window.
@@ -271,8 +271,8 @@ public:
 
     BOOL isActive();
 protected:
-    virtual BOOL onPreRegisterWindowClass(huys::UWindowClass &uwc) {return FALSE;}
-    virtual BOOL onPreCreateWindow() {return TRUE;}
+    virtual LRESULT onPreRegisterWindowClass(huys::UWindowClass &uwc) {return FALSE;}
+    virtual LRESULT onPreCreateWindow() {return TRUE;}
 private:
     HWND m_hParent;
     HWND m_hSelf;

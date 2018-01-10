@@ -10,7 +10,7 @@ public:
     UDialogBox(
         HINSTANCE hInst,
         UINT nID,
-        DLGPROC lpDialogFunc=UDialogBox::DefaultDlgProc,
+        DLGPROC lpDialogFunc=(DLGPROC)UDialogBox::DefaultDlgProc,
         HWND hParent=NULL);
 
     virtual ~UDialogBox();
@@ -21,7 +21,7 @@ public:
     virtual BOOL hide();
     virtual BOOL show();
 
-    static BOOL CALLBACK DefaultDlgProc(HWND hDlg, UINT message,
+    static LRESULT CALLBACK DefaultDlgProc(HWND hDlg, UINT message,
         WPARAM wParam, LPARAM lParam);
     //
     static BOOL onCancel(HWND hDlg);

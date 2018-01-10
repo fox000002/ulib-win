@@ -17,7 +17,7 @@ public:
 
     static HWND findWindowEx(LPCTSTR lpszClass, LPCTSTR lpszWindow);
 
-    virtual BOOL onMessage(UINT uMessage, WPARAM wParam, LPARAM lParam);
+    virtual LRESULT onMessage(UINT uMessage, WPARAM wParam, LPARAM lParam);
 private:
     BOOL msgHandler();
 };

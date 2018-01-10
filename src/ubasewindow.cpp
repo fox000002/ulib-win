@@ -34,7 +34,7 @@ LRESULT CALLBACK DefaultUBaseWindowProc(HWND hWnd, UINT nMsg, WPARAM wParam, LPA
     if (nMsg == WM_NCCREATE) {
         // if this nMessage gets sent then a new window has just been created,
         // so we'll asociate its handle with its AbstractWindow instance pointer
-        ::SetWindowLongPtr (hWnd, GWLP_USERDATA, long((LPCREATESTRUCT(lParam))->lpCreateParams));
+        ::SetWindowLongPtr (hWnd, GWLP_USERDATA, (LONG_PTR)((LPCREATESTRUCT(lParam))->lpCreateParams));
     }
 
     pBaseWnd = reinterpret_cast<UBaseWindow *>(::GetWindowLongPtr(hWnd, GWLP_USERDATA));
@@ -163,12 +163,12 @@ bool UBaseWindow::registerWndClass()
     return true;
 }
 
-BOOL UBaseWindow::defaultMessageHandler(UINT uMessage, WPARAM wParam, LPARAM lParam)
+LRESULT UBaseWindow::defaultMessageHandler(UINT uMessage, WPARAM wParam, LPARAM lParam)
 {
     return ::DefWindowProc(m_hSelf, uMessage, wParam, lParam);
 }
 
-BOOL UBaseWindow::onMessage(UINT uMessage, WPARAM wParam, LPARAM lParam)
+LRESULT UBaseWindow::onMessage(UINT uMessage, WPARAM wParam, LPARAM lParam)
 {
     if (filterMessage(uMessage, wParam, lParam))
     {
@@ -224,7 +224,7 @@ BOOL UBaseWindow::onMessage(UINT uMessage, WPARAM wParam, LPARAM lParam)
     case WM_CTLCOLORLISTBOX:
         {
         HBRUSH hbr = 0;
-        if (0 != (hbr = (HBRUSH)this->onCtrlColor(wParam, lParam))) return (BOOL)hbr;
+        if (0 != (hbr = (HBRUSH)this->onCtrlColor(wParam, lParam))) return (LONG_PTR)hbr;
         return defaultMessageHandler(uMessage, wParam, lParam);
         }
     case WM_MEASUREITEM:

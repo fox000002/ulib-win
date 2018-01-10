@@ -25,7 +25,7 @@ HWND UMessageOnlyWindow::findWindowEx( LPCTSTR lpszClass, LPCTSTR lpszWindow )
     return ::FindWindowEx(HWND_MESSAGE, NULL, lpszClass, lpszWindow);
 }
 
-BOOL UMessageOnlyWindow::onMessage( UINT uMessage, WPARAM wParam, LPARAM lParam )
+LRESULT UMessageOnlyWindow::onMessage( UINT uMessage, WPARAM wParam, LPARAM lParam )
 {
     if (UMessageOnlyWindow::WM_CUSTOM_MSG == uMessage)
     {

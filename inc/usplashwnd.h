@@ -28,10 +28,10 @@ public:
     virtual void onDraw(HDC hdc);
     virtual BOOL onTimer(WPARAM wParam, LPARAM lParam);
 
-    virtual BOOL filterMessage(UINT uMessage, WPARAM wParam, LPARAM lParam);
+    virtual LRESULT filterMessage(UINT uMessage, WPARAM wParam, LPARAM lParam);
 
 protected:
-    BOOL onPreRegisterWindowClass(huys::UWindowClass &uwc);
+    LRESULT onPreRegisterWindowClass(huys::UWindowClass &uwc);
     //
     bool setTransparentColor(huys::Color clr);
 private:

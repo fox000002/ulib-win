@@ -42,10 +42,27 @@ void BrowseFolder(HWND hWnd, LPCTSTR lpTitle)
     //return szPath;
 }
 
+void FileOperation(HWND hWnd, LPCSTR src, LPCSTR dest, LPCSTR title)
+{
+	SHFILEOPSTRUCT FileOp; //外壳的文件操作结构
+	FileOp.hwnd = hWnd; //设置句柄
+	//设置操作方式，拷贝用FO_COPY，删除用 FO_DELETE
+	FileOp.wFunc = FO_COPY;
+	FileOp.pFrom = src; //源文件路径
+	FileOp.pTo = dest; //目标文件路径
+	FileOp.fFlags = FOF_ALLOWUNDO; //允许恢复
+	FileOp.hNameMappings = NULL;
+	FileOp.lpszProgressTitle = title; //设置标题
+	SHFileOperation(&FileOp); //执行外壳拷贝
+	if(FileOp.fAnyOperationsAborted) //监测有无中止
+		UShell::msgbox(NULL, "Info", "An Operation was aborted!!!\n");
+}
+
 class UMyWindow : public UBaseWindow
 {
     enum {
-        ID_BN_EXEC = 1111
+        ID_BN_EXEC   = 1111,
+		ID_BN_FOLDER = 1112
     };
 public:
     UMyWindow()
@@ -69,6 +86,11 @@ public:
         _bnExec->setPos(100, 100, 100, 50);
         _bnExec->create();
         _bnExec->setWindowText(_T("notepad"));
+		
+		_bnFolder = new UButton(this, ID_BN_FOLDER);
+        _bnFolder->setPos(100, 200, 100, 50);
+        _bnFolder->create();
+        _bnFolder->setWindowText(_T("folder"));
 
         return UBaseWindow::onCreate();
     }
@@ -90,21 +112,27 @@ public:
         {
         case ID_BN_EXEC:
             return onBnExec();
+		case ID_BN_FOLDER:
+			return onBnFolder();
         default:
             return UBaseWindow::onCommand(wParam, lParam);
         }
     }
 private:
     AUI::UButtonP _bnExec;
-
+	AUI::UButtonP _bnFolder;
 private:
     BOOL onBnExec()
     {
         UShell::execute(NULL, "notepad");
-		
-		BrowseFolder(*this, "Select");
         return FALSE;
     }
+	
+	BOOL onBnFolder()
+	{
+		BrowseFolder(*this, "Select Folder");
+        return FALSE;	
+	}
 };
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR lpszCmdLine, int nCmdShow)

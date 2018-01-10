@@ -89,7 +89,7 @@ BOOL UDialogBox::onCancel(HWND hDlg)
     return TRUE;
 }
 
-BOOL CALLBACK UDialogBox::DefaultDlgProc(HWND hDlg, UINT message,
+LRESULT CALLBACK UDialogBox::DefaultDlgProc(HWND hDlg, UINT message,
                             WPARAM wParam, LPARAM lParam)
 {
     switch (message)

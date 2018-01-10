@@ -13,9 +13,9 @@ public:
 public:
     UGLWindow(HINSTANCE hInst = GetModuleHandle(NULL));
 
-    BOOL onPreRegisterWindowClass(huys::UWindowClass &uwc);
+    LRESULT onPreRegisterWindowClass(huys::UWindowClass &uwc);
 
-    BOOL onPreCreateWindow();
+    LRESULT onPreCreateWindow();
 
     BOOL onCreate();
 
