@@ -71,6 +71,7 @@ CRYPTO_OBJS =     \
     md5.o         \
     crc32.o       \
     base64.o      \
+	sha.o         \
 
 
 ifeq ($(PLATFORM), win32)

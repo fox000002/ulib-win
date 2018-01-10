@@ -28,6 +28,8 @@ public:
 
     bool addIPAddress();
     bool deleteIPAddress();
+	
+	void printIPAddrTable();
 protected:
 private:
     FIXED_INFO *m_pFixedInfo;

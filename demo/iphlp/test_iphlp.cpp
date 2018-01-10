@@ -24,6 +24,11 @@ int main(int argc, char *argv[])
     UConsole::PrintStdoutFormat( "DNS Servers:\n" );
     UConsole::PrintStdoutFormat( "\t%s\n", uih.dnsServer());
     UConsole::PrintStdoutFormat( "\t%s\n", uih.dnsServerExtra());
+	
+	UConsole::PrintStdoutFormat("\n============================================\n");
+	
+	uih.getIPAddressTable();
+	uih.printIPAddrTable();
 
     return 0;
 }

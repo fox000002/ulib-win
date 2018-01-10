@@ -22,6 +22,7 @@
 #include <windows.h>
 #include <tchar.h>
 #include <winsock2.h>
+#include <ws2tcpip.h>
 
 #if defined(_MSC_VER) && (_MSC_VER <= 1200)
   #include "fix/iphlpapi.h"
@@ -31,6 +32,15 @@
 #ifndef   __GNUC__
   #include <icmpapi.h>
 #endif
+#endif
+
+#ifndef MIB_IPADDR_PRIMARY
+#define MIB_IPADDR_PRIMARY      0x0001 // Primary ipaddr
+#define MIB_IPADDR_DYNAMIC      0x0004 // Dynamic ipaddr
+#define MIB_IPADDR_DISCONNECTED 0x0008 // Address is on disconnected interface
+#define MIB_IPADDR_DELETED      0x0040 // Address being deleted
+#define MIB_IPADDR_TRANSIENT    0x0080 // Transient address
+#define MIB_IPADDR_DNS_ELIGIBLE 0X0100 // Address is published in DNS.
 #endif
 
 #include <stdio.h>
@@ -180,6 +190,39 @@ bool UIPHelp::getIPAddressTable()
     }
 
     return true;
+}
+
+void UIPHelp::printIPAddrTable()
+{
+	if (m_pIPAddrTable)
+	{
+	IN_ADDR IPAddr;
+
+	printf("\tNum Entries: %ld\n", m_pIPAddrTable->dwNumEntries);
+    for (int i=0; i < (int) m_pIPAddrTable->dwNumEntries; i++)
+	{
+        printf("\n\tInterface Index[%d]:\t%ld\n", i, m_pIPAddrTable->table[i].dwIndex);
+        IPAddr.S_un.S_addr = (u_long) m_pIPAddrTable->table[i].dwAddr;
+        printf("\tIP Address[%d]:     \t%s\n", i, inet_ntoa(IPAddr) );
+        IPAddr.S_un.S_addr = (u_long) m_pIPAddrTable->table[i].dwMask;
+        printf("\tSubnet Mask[%d]:    \t%s\n", i, inet_ntoa(IPAddr) );
+        IPAddr.S_un.S_addr = (u_long) m_pIPAddrTable->table[i].dwBCastAddr;
+        printf("\tBroadCast[%d]:      \t%s (%ld%)\n", i, inet_ntoa(IPAddr), m_pIPAddrTable->table[i].dwBCastAddr);
+        printf("\tReassembly size[%d]:\t%ld\n", i, m_pIPAddrTable->table[i].dwReasmSize);
+        printf("\tType and State[%d]:", i);
+        if (m_pIPAddrTable->table[i].wType & MIB_IPADDR_PRIMARY)
+            printf("\tPrimary IP Address");
+        if (m_pIPAddrTable->table[i].wType & MIB_IPADDR_DYNAMIC)
+            printf("\tDynamic IP Address");
+        if (m_pIPAddrTable->table[i].wType & MIB_IPADDR_DISCONNECTED)
+            printf("\tAddress is on disconnected interface");
+        if (m_pIPAddrTable->table[i].wType & MIB_IPADDR_DELETED)
+            printf("\tAddress is being deleted");
+        if (m_pIPAddrTable->table[i].wType & MIB_IPADDR_TRANSIENT)
+            printf("\tTransient address");
+        printf("\n");
+    }
+	}
 }
 
 bool UIPHelp::releaseIPAddress()
