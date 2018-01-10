@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<!DOCTYPE QuickDiscDoc SYSTEM "\\RimageSystem\Rimage\XML\QuickDiscDoc_2.24.DTD">
+<QuickDiscDoc>
+	<General JobType="DDP" LastRun="2012-08-17 14:47:11" DiscType="none" Priority="Normal" TimesRun="1" AllowSpanning="false"/>
+	<ProducingOptions Bin="ANY" Line="ANY" Final="true" Copies="100" Server="ANY" Cluster="DefaultProductionCluster" HashType="MD5" MailSlot="none" UserData="" UserType="none" MediaSize="120mm" MediaType="CDR" VerifyHash="" EmailAddress="" FinalizeType="SAO" VerifyMethod="none" BlocksInLayer="0" MergeSessions="false" RimageProtect="false" VerifyChecksum="" SimulatePrinting="false" SimulateRecording="false" VerifyEveryNthDisc="1"/>
+	<DDPFolders DDPFolder1="\\Radium\space\Third party\FELLSIDE\LACD\LACD291-CD TEXT\" DDPFolder2=""/>
+	<LabelFile Template="false" SaveLabel="false" PrintLabel="true" AddLabelInfo="false" PerfectPrint="false" LabelFilename="\\Radium\space\Third party\FELLSIDE\LACD\LACD291-CD TEXT\LACD291 label - White CD.pdf" BitmapFilename="" PerfectPrintAngle="0.00"/>
+	<MergeFile UseMerge="false" MergeFilename="" MergeFileHasFieldNames="true"/>
+
+</QuickDiscDoc>

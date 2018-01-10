@@ -52,6 +52,11 @@ public:
     : _root(0)
     {}
 
+	Binary_node<Entry> * root()
+	{
+		return _root;
+	}
+
     //
     bool empty() const
     {

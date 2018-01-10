@@ -405,11 +405,13 @@ public:
     {
         m_nStrLength = lstrlen(m_pBuf);
     }
+
 private:
     T *m_pBuf;
     size_type m_nBufSize;
     size_type m_nStrLength;
 };
+
 
 template  <typename T, size_t default_bufsize>
 inline bool operator == (const UString<T, default_bufsize> & a, const UString<T, default_bufsize> & b)

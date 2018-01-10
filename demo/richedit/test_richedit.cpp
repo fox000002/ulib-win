@@ -27,7 +27,7 @@ public:
     {
         m_pRichEdit = new URichEdit(m_hDlg, IDC_RICHEDIT, m_hInst);
 
-        m_pRichEdit->setStyles(ES_MULTILINE|ES_WANTRETURN|WS_VISIBLE|WS_CHILD|WS_BORDER|WS_TABSTOP);
+        m_pRichEdit->setStyles(ES_MULTILINE|WS_VISIBLE|WS_CHILD|WS_BORDER|WS_TABSTOP);
 
         m_pRichEdit->create();
 
@@ -43,6 +43,17 @@ public:
 
         return TRUE;
     }
+	
+	BOOL onCommand(WPARAM wParam, LPARAM lParam)
+	{
+		switch (LOWORD (wParam))
+		{
+		case IDOK:
+		case IDCANCEL:
+			break;
+		}
+		return FALSE;
+	}
 private:
     huys::ADT::UAutoPtr<URichEdit> m_pRichEdit;
 };

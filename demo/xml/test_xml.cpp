@@ -1,5 +1,4 @@
 #include <windows.h>
-#include <cstdio>
 #include <cctype>
 
 #include "uxmlparser.h"
@@ -37,7 +36,14 @@ int main()
     parser.parse("<!def");
 
     parser.parse("<product id=100 cc=aa>Cloth</product>");
-
+	
+    printf("-------------------------------------------------------------\n");
+	
+	huys::XML::UXMLElement elem("Doc");
+	elem.setAttribute("Attr1", "23");
+	elem.setText("Simple Text");
+	printf(elem.toString());
+	printf("\n");
     printf("Press any key to continue...");
     getchar();
     return 0;

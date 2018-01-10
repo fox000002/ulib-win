@@ -85,7 +85,7 @@ public:
       _type(XML_NT_UNKNOWN)
     {}
 
-    ~UXMLNode()
+    virtual ~UXMLNode()
     {}
 
     bool isRoot() const
@@ -128,6 +128,7 @@ public:
         _lastChild = node;
     }
 
+	virtual UXMLString toString() { UXMLString tmp; return tmp; }
 protected:
     XMLNodeType _type;
 private:
@@ -188,6 +189,13 @@ public:
     {
         return _name == name;
     }
+	
+	UXMLString toString()
+	{
+		UXMLString tmp;
+		tmp << _name << "=\"" << _value << "\"";
+		return tmp;
+	}
 private:
     UXMLString _name;
     UXMLString _value;
@@ -207,6 +215,13 @@ public:
     {
 
     }
+	
+	UXMLString toString()
+	{
+		UXMLString tmp;
+		tmp << _text;
+		return tmp;
+	}
 protected:
 private:
     UXMLString _text;
@@ -220,8 +235,15 @@ public:
     {
         _type = XML_NT_ELEMENT;
     }
+	
+	UXMLElement(const char * name)
+	: _text(0)
+	{
+		_type = XML_NT_ELEMENT;
+		_name = name;
+	}
 
-    ~UXMLElement()
+    /*virtual*/ ~UXMLElement()
     {
         if (_text)
         {
@@ -270,6 +292,26 @@ public:
     {
         return 0 != _text;
     }
+	
+	virtual UXMLString toString()
+	{
+		UXMLString str;
+		str << "<" << _name << " ";
+		UXMLAttributes::size_type i=0;
+		for (i=0; i<_attributes.size()-1; ++i)
+		{
+			str << _attributes[i].toString() << " ";
+		}
+		str << _attributes[i].toString();
+		str << ">";
+		if (hasText())
+		{
+			str << _text->toString();
+		}
+		str << "</" << _name << ">";
+		
+		return str;
+	}
 protected:
 private:
     UXMLString _name;
@@ -285,7 +327,7 @@ public:
         _type = XML_NT_COMMNET;
     }
 
-    ~UXMLComment() {}
+    /*virtual*/ ~UXMLComment() {}
 private:
     UXMLString _text;
 };
@@ -297,7 +339,7 @@ public:
     {
         _type = XML_NT_HEADER;
     }
-    ~UXMLHeader() {}
+    /*virtual*/ ~UXMLHeader() {}
 private:
     UXMLString _version;
     UXMLString _encoding;
@@ -310,6 +352,8 @@ public:
     {
         _type = XML_NT_UNKNOWN;
     }
+	
+	/*virtual*/  ~UXMLUnknown() {}
 };
 
 class UXMLParser
