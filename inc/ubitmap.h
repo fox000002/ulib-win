@@ -58,6 +58,7 @@ public:
     //
     BOOL createMappedBitmap(HINSTANCE hInst, UINT uImageID, huys::Color clrFrom, huys::Color clrTo);
     HBITMAP copyImage(HBITMAP hbm);
+	HBITMAP clipImage(int x, int y, int w, int h);
     HBITMAP copyIcon(HICON hIcon, huys::Color clrBk = huys::black);
     
     BOOL destroyBitmap();

@@ -7,7 +7,7 @@ include $(TOPDIR)/make.inc
 INCS = -I"$(TOPDIR)/inc"
 LIBS = -L"$(TOPDIR)/lib"
 CFLAGS +=
-CXXFLAGS += -std=c++0x
+CXXFLAGS += -std=c++11
 
 #
 OBJ = test_turple.o

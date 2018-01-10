@@ -10,8 +10,8 @@ CFLAGS +=
 CXXFLAGS += -std=c++11
 
 #
-OBJ = test_lambda.o
-BIN = test_lambda.exe
+OBJ = test_type_traits.o
+BIN = test_type_traits.exe
 RC  =
 RES = ${RC:.rc=.res}
 #

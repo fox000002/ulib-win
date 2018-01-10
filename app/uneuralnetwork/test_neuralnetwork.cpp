@@ -59,11 +59,11 @@ void calcNet(void)
     int i = 0;
     for(i = 0;i<numHidden;i++)
     {
-	  hiddenVal[i] = 0.0;
+      hiddenVal[i] = 0.0;
 
         for(int j = 0;j<numInputs;j++)
         {
-	   hiddenVal[i] = hiddenVal[i] + (trainInputs[patNum][j] * weightsIH[j][i]);
+       hiddenVal[i] = hiddenVal[i] + (trainInputs[patNum][j] * weightsIH[j][i]);
         }
 
         hiddenVal[i] = tanh(hiddenVal[i]);

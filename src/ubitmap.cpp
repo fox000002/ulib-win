@@ -443,6 +443,26 @@ HBITMAP UBitmap::copyImage( HBITMAP hbm )
     return hbmNew;
 }
 
+HBITMAP UBitmap::clipImage(int x, int y, int w, int h)
+{
+	HBITMAP hbm = (HBITMAP)m_hObj;
+    HDC hdcSrc = ::CreateCompatibleDC(NULL);
+    HDC hdcDst = ::CreateCompatibleDC(NULL);
+    HBITMAP hbmOld, hbmOld2, hbmNew;
+    BITMAP bm;
+    ::GetObject(hbm, sizeof(bm), &bm);
+    hbmOld = (HBITMAP)::SelectObject(hdcSrc, hbm);
+    hbmNew = ::CreateBitmap( bm.bmWidth, bm.bmHeight, 
+        bm.bmPlanes, bm.bmBitsPixel, NULL);
+    hbmOld2 = (HBITMAP)::SelectObject(hdcDst, hbmNew);
+    ::BitBlt(hdcDst, 0, 0, w, h, hdcSrc, x, y, SRCCOPY);
+    ::SelectObject(hdcSrc, hbmOld);
+    ::DeleteDC(hdcSrc);
+    ::DeleteDC(hdcDst);	
+	
+	return hbmNew;
+}
+
 HBITMAP UBitmap::copyIcon(HICON hIcon, huys::Color clrBk)
 {
     //HDC hdcSrc = ::CreateCompatibleDC(NULL);

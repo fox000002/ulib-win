@@ -11,11 +11,7 @@
 #include "ushell.h"
 
 void BrowseFolder(HWND hWnd, LPCTSTR lpTitle)
-{
-    // 调用 SHBrowseForFolder 取得目录(文件夹)名称
-    // 参数 hWnd: 父窗口句柄
-    // 参数 lpTitle: 窗口标题
-    
+{  
     char szPath[MAX_PATH]={0};
     BROWSEINFO m_bi;
 
@@ -24,7 +20,7 @@ void BrowseFolder(HWND hWnd, LPCTSTR lpTitle)
     m_bi.pidlRoot = NULL;
     m_bi.lpszTitle = lpTitle;
     m_bi.lpfn = NULL;
-    m_bi.lParam = NULL;
+    m_bi.lParam = (LPARAM)NULL;
     m_bi.pszDisplayName = szPath;
 
     LPITEMIDLIST pidl = ::SHBrowseForFolder( &m_bi );
@@ -33,10 +29,10 @@ void BrowseFolder(HWND hWnd, LPCTSTR lpTitle)
         if( !::SHGetPathFromIDList ( pidl, szPath ) )  szPath[0]=0;
 
         IMalloc * pMalloc = NULL;
-        if ( SUCCEEDED ( ::SHGetMalloc( &pMalloc ) ) )  // 取得IMalloc分配器接口
+        if ( SUCCEEDED ( ::SHGetMalloc( &pMalloc ) ) )
         {
-            pMalloc->Free( pidl );    // 释放内存
-            pMalloc->Release();       // 释放接口
+            pMalloc->Free( pidl );
+            pMalloc->Release();
         }
     }
     //return szPath;
@@ -44,17 +40,16 @@ void BrowseFolder(HWND hWnd, LPCTSTR lpTitle)
 
 void FileOperation(HWND hWnd, LPCSTR src, LPCSTR dest, LPCSTR title)
 {
-	SHFILEOPSTRUCT FileOp; //外壳的文件操作结构
-	FileOp.hwnd = hWnd; //设置句柄
-	//设置操作方式，拷贝用FO_COPY，删除用 FO_DELETE
+	SHFILEOPSTRUCT FileOp;
+	FileOp.hwnd = hWnd;
 	FileOp.wFunc = FO_COPY;
-	FileOp.pFrom = src; //源文件路径
-	FileOp.pTo = dest; //目标文件路径
-	FileOp.fFlags = FOF_ALLOWUNDO; //允许恢复
+	FileOp.pFrom = src;
+	FileOp.pTo = dest;
+	FileOp.fFlags = FOF_ALLOWUNDO;
 	FileOp.hNameMappings = NULL;
-	FileOp.lpszProgressTitle = title; //设置标题
-	SHFileOperation(&FileOp); //执行外壳拷贝
-	if(FileOp.fAnyOperationsAborted) //监测有无中止
+	FileOp.lpszProgressTitle = title;
+	SHFileOperation(&FileOp);
+	if(FileOp.fAnyOperationsAborted)
 		UShell::msgbox(NULL, "Info", "An Operation was aborted!!!\n");
 }
 
@@ -72,7 +67,7 @@ public:
         this->setPos(0, 0, 800, 600);
     }
 
-    /* virtual */  BOOL onPreRegisterWindowClass(huys::UWindowClass &uwc)
+    /* virtual */  LRESULT	onPreRegisterWindowClass(huys::UWindowClass &uwc)
     {
         uwc.setBKBrush((HBRUSH)::GetStockObject(GRAY_BRUSH));
         return TRUE;

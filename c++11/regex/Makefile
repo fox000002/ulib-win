@@ -5,7 +5,7 @@ include $(TOPDIR)/make.inc
 
 #
 INCS = -I"$(TOPDIR)/inc"
-LIBS = -L"$(TOPDIR)/lib"
+LIBS = -L"$(TOPDIR)/lib" -lboost_regex
 CFLAGS +=
 CXXFLAGS += -std=c++11
 

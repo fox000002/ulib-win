@@ -12,12 +12,12 @@ class UTransRadioButton : public URadioButton
 {
 public:
     UTransRadioButton(HWND hParent, UINT nResource, HINSTANCE hInst)
-    : URadioButton(hParent, nResource, hInst)
+    : URadioButton(hParent, nResource, hInst), m_hbrBack(0)
     {
     }
 
     UTransRadioButton(UBaseWindow *pWndParent, UINT nID)
-    : URadioButton(pWndParent, nID)
+    : URadioButton(pWndParent, nID), m_hbrBack(0)
     {
     }
 
@@ -25,14 +25,24 @@ public:
     {
         return (URadioButton::create() && this->subclassProc());
     }
+	
 
     /* virtual */ BOOL onCtrlColor(WPARAM wParam, LPARAM lParam)
     {
         HDC hdc = (HDC)wParam;
         ::SetBkMode(hdc, TRANSPARENT);
+		
+		if (m_hbrBack) return (BOOL)m_hbrBack;
+		
         return (BOOL)(HBRUSH)GetStockObject(NULL_BRUSH);
     }
-
+	
+	void SetHBrush(HBRUSH hbr)
+	{
+		m_hbrBack = hbr;
+	}
+private:
+	HBRUSH m_hbrBack;
 };
 
 class UTransCheckButton : public UCheckButton

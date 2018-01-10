@@ -346,7 +346,7 @@ LRESULT UControl::newControlProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lPa
     //}
 
     BOOL bRet;
-    if (uMsg == WM_CTLCOLORSTATIC || uMsg == WM_CTLCOLOREDIT)
+    if (uMsg == WM_CTLCOLORSTATIC || uMsg == WM_CTLCOLOREDIT || uMsg == WM_CTLCOLORBTN)
     {
         if ((bRet=UDialogBox::onCtrlColor(wParam, lParam)) != FALSE)
         {

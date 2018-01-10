@@ -18,17 +18,7 @@
 static WNDPROC g_pfnOldProc;
 static HWND g_hwndButton=NULL;
 
-LRESULT CALLBACK ButtonProc( HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam )
-　{
-　　switch( uiMsg )
-　　{
-　　case WM_NCACTIVATE:
-　　　if( wParam==TRUE )
-　　　　OnButtonActivation();
-　　　　break;
-　　}
-　　return CallWindowProc( g_pfnOldProc, hwnd, uiMsg, wParam, lParam );
-　}
+LRESULT CALLBACK ButtonProc( HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam );
 
 class UShellWindow : public UBaseWindow
 {
@@ -116,125 +106,137 @@ private:
         pShellDisp->Release();
         return FALSE;
     }
-	
-	VOID OnRunPrograms( VOID )
-　	{
-　　	HRESULT sc;
-　　	IShellDispatch *pShellDisp = NULL;
-　　	sc = CoCreateInstance( CLSID_Shell, NULL, CLSCTX_SERVER, IID_IShellDispatch, (LPVOID *) &pShellDisp );
-　　	if( FAILED(sc) )
-　　　		return;
-　　	pShellDisp->FileRun();
-　　	pShellDisp->Release();
-　　	return;
-　	}
 
-	VOID OnMinimizeAll( VOID )
-　	{
-　　	HRESULT sc;
-　　	IShellDispatch *pShellDisp = NULL;
-　　	sc = CoCreateInstance( CLSID_Shell, NULL, CLSCTX_SERVER, IID_IDispatch, (LPVOID *) &pShellDisp );
-　　	if( FAILED(sc) )
-　　　		return;
-　　	pShellDisp->MinimizeAll();
-　　	pShellDisp->Release();
-　　	return;
-　	}
+    VOID OnRunPrograms( VOID )
+    {
+        HRESULT sc;
+        IShellDispatch *pShellDisp = NULL;
+        sc = CoCreateInstance( CLSID_Shell, NULL, CLSCTX_SERVER, IID_IShellDispatch, (LPVOID *) &pShellDisp );
+        if( FAILED(sc) )
+            return;
+        pShellDisp->FileRun();
+        pShellDisp->Release();
+        return;
+    }
 
-	VOID OnUndoMinimize( VOID )
-　	{
-　　	HRESULT sc;
-　　	IShellDispatch *pShellDisp = NULL;
-　　	sc = CoCreateInstance( CLSID_Shell, NULL, CLSCTX_SERVER, IID_IDispatch, (LPVOID *) &pShellDisp );
-　　	if( FAILED(sc) )
-　　　		return;
-　　	pShellDisp->UndoMinimizeALL();
-　　	pShellDisp->Release();
-　　	return;
-　	}
+    VOID OnMinimizeAll( VOID )
+    {
+        HRESULT sc;
+        IShellDispatch *pShellDisp = NULL;
+        sc = CoCreateInstance( CLSID_Shell, NULL, CLSCTX_SERVER, IID_IDispatch, (LPVOID *) &pShellDisp );
+        if( FAILED(sc) )
+            return;
+        pShellDisp->MinimizeAll();
+        pShellDisp->Release();
+        return;
+    }
 
-	VOID OnAddTab( HWND hWnd )
-　	{
-　　	static BOOL g_bFirstTime=TRUE;
-　　	HRESULT sc;
-　　	ITaskbarList *pDisp = NULL;
-　　	sc = CoCreateInstance( CLSID_TaskbarList, NULL, CLSCTX_SERVER, IID_ITaskbarList, (LPVOID *) &pDisp );
-　　	if( FAILED(sc) )
-　　　		return;
-　　	// call the first time only
-　　	if( g_bFirstTime )
-　　	{
-　　　		g_bFirstTime = FALSE;
-　　　		pDisp->HrInit();
-　　　		// create a new button window
-　　　		g_hwndButton = CreateWindow( "button", "My Button", WS_CLIPSIBLINGS|BS_PUSHBUTTON,0, 0, 58, 14, hWnd, NULL, g_hInstance, NULL ); 　
-　　　	    g_pfnOldProc = (WNDPROC) SubclassWindow( g_hwndButton, ButtonProc );
-　　	}
-　　	pDisp->AddTab( g_hwndButton );
-　　	pDisp->Release();
-　　	return;
-　	}
+    VOID OnUndoMinimize( VOID )
+    {
+        HRESULT sc;
+        IShellDispatch *pShellDisp = NULL;
+        sc = CoCreateInstance( CLSID_Shell, NULL, CLSCTX_SERVER, IID_IDispatch, (LPVOID *) &pShellDisp );
+        if( FAILED(sc) )
+            return;
+        pShellDisp->UndoMinimizeALL();
+        pShellDisp->Release();
+        return;
+    }
 
-　	VOID OnDeleteTab( VOID )
-　	{
-　　	HRESULT sc;
-　　	ITaskbarList *pDisp = NULL;
-　　	sc = CoCreateInstance( CLSID_TaskbarList, NULL, CLSCTX_SERVER, IID_ITaskbarList, (LPVOID *) &pDisp );
-　　	if( FAILED(sc) )
-　　　		return;
-　　	pDisp->DeleteTab( g_hwndButton );
-　　	pDisp->Release();
-　　	return;
-　	}
+    VOID OnAddTab( HWND hWnd )
+    {
+        static BOOL g_bFirstTime=TRUE;
+        HRESULT sc;
+        ITaskbarList *pDisp = NULL;
+        sc = CoCreateInstance( CLSID_TaskbarList, NULL, CLSCTX_SERVER, IID_ITaskbarList, (LPVOID *) &pDisp );
+        if( FAILED(sc) )
+            return;
+        // call the first time only
+        if( g_bFirstTime )
+        {
+            g_bFirstTime = FALSE;
+            pDisp->HrInit();
+            // create a new button window
+            g_hwndButton = CreateWindow( "button", "My Button", WS_CLIPSIBLINGS|BS_PUSHBUTTON,0, 0, 58, 14, hWnd, NULL,g_hInstance, NULL );
+            g_pfnOldProc = (WNDPROC) SubclassWindow( g_hwndButton, ButtonProc );
+        }
+        pDisp->AddTab( g_hwndButton );
+        pDisp->Release();
+        return;
+    }
 
-　	VOID OnButtonActivation( VOID )
-　	{
-　　	HMENU hmenu;
-　　	RECT r;
-　　	LONG x, y;
-　　	// get some window handles
-　　	HWND h0=FindWindow("Shell_TrayWnd", NULL );
-　　	HWND h1=FindWindowEx(h0,NULL,"RebarWindow32", NULL);
-　　	HWND h2=FindWindowEx(h1,NULL,"MSTaskSwWClass", NULL);
-　　	HWND h3=FindWindowEx(h2,NULL,"SysTabControl32", NULL);
-　　	GetWindowRect( h3, &r );
-　　	// get the currently selected button and
-　　	// create a new popup menu
-　　	hmenu = CreatePopupMenu();
-　　	INT i=TabCtrl_GetCurSel( h3 );
-　　	if( i==-1 )
-　　	{
-　　　		AppendMenu( hmenu, MF_STRING, IDC_DELETETAB,"&Close" );
-　　	}
-　　	else
-　　	{
-　　　		AppendMenu( hmenu, MF_STRING, IDC_MINIMIZE,"&Minimize All" );
-　　　		AppendMenu( hmenu, MF_STRING, IDC_UNDOMINIMIZE,"&Undo Minimize All" );
-　　　		AppendMenu( hmenu, MF_SEPARATOR, 0, NULL );
-　　　		AppendMenu( hmenu, MF_STRING, IDC_PROPERTIES,"&Taskbar Properties" );
-　　	}
-　　	// set and immediately reset its size to get
-　　	// the current width and height
-　　	LONG l = TabCtrl_SetItemSize( h3, 0, 0 );
-　　	TabCtrl_SetItemSize( h3, LOWORD(l), HIWORD(l) );
-　　	// have the menu to appear just above the button
-　　	if( i==-1 )
-　　	{
-　　　		POINT pt;
-　　　		GetCursorPos( &pt );
-　　　		x = pt.x;
-　　　		y = pt.y;
-　　	}
-　　	else
-　　	{
-　　　		x = r.left + LOWORD(l)*i+3;
-　　　		y = GetSystemMetrics(SM_CYSCREEN)-(HIWORD(l)+1);
-　　	}
-　　	TrackPopupMenu( hmenu, TPM_BOTTOMALIGN, x, y, 0, g_hDlg, 0);
-　　	DestroyMenu( hmenu );
-　　	return;
-　	}
+    VOID OnDeleteTab( VOID )
+    {
+        HRESULT sc;
+        ITaskbarList *pDisp = NULL;
+        sc = CoCreateInstance( CLSID_TaskbarList, NULL, CLSCTX_SERVER, IID_ITaskbarList, (LPVOID *) &pDisp );
+        if( FAILED(sc) )
+            return;
+        pDisp->DeleteTab( g_hwndButton );
+        pDisp->Release();
+        return;
+    }
+
+    static VOID OnButtonActivation( VOID )
+    {
+        HMENU hmenu;
+        RECT r;
+        LONG x, y;
+        // get some window handles
+        HWND h0=FindWindow("Shell_TrayWnd", NULL );
+        HWND h1=FindWindowEx(h0,NULL,"RebarWindow32", NULL);
+        HWND h2=FindWindowEx(h1,NULL,"MSTaskSwWClass", NULL);
+        HWND h3=FindWindowEx(h2,NULL,"SysTabControl32", NULL);
+        GetWindowRect( h3, &r );
+        // get the currently selected button and
+        // create a new popup menu
+        hmenu = CreatePopupMenu();
+        INT i=TabCtrl_GetCurSel( h3 );
+        if( i==-1 )
+        {
+            AppendMenu( hmenu, MF_STRING, IDC_DELETETAB,"&Close" );
+        }
+        else
+        {
+            AppendMenu( hmenu, MF_STRING, IDC_MINIMIZE,"&Minimize All" );
+            AppendMenu( hmenu, MF_STRING, IDC_UNDOMINIMIZE,"&Undo Minimize All" );
+            AppendMenu( hmenu, MF_SEPARATOR, 0, NULL );
+            AppendMenu( hmenu, MF_STRING, IDC_PROPERTIES,"&Taskbar Properties" );
+        }
+        // set and immediately reset its size to get
+        // the current width and height
+        LONG l = TabCtrl_SetItemSize( h3, 0, 0 );
+        TabCtrl_SetItemSize( h3, LOWORD(l), HIWORD(l) );
+        // have the menu to appear just above the button
+        if( i==-1 )
+        {
+            POINT pt;
+            GetCursorPos( &pt );
+            x = pt.x;
+            y = pt.y;
+        }
+        else
+        {
+            x = r.left + LOWORD(l)*i+3;
+            y = GetSystemMetrics(SM_CYSCREEN)-(HIWORD(l)+1);
+        }
+        TrackPopupMenu( hmenu, TPM_BOTTOMALIGN, x, y, 0, g_hDlg, 0);
+        DestroyMenu( hmenu );
+        return;
+    }
 };
+
+LRESULT CALLBACK ButtonProc( HWND hwnd, UINT uiMsg, WPARAM wParam, LPARAM lParam )
+{
+    switch( uiMsg )
+    {
+    case WM_NCACTIVATE:
+      if( wParam==TRUE )
+        UShellWindow::OnButtonActivation();
+        break;
+    }
+    return CallWindowProc( g_pfnOldProc, hwnd, uiMsg, wParam, lParam );
+}
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR lpszCmdLine, int nCmdShow)
 {

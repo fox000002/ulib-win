@@ -5,10 +5,21 @@ include $(TOPDIR)/make.inc
 
 #
 SUBDIRS =        \
-      turple     \
-      regex      \
-      lambda     \
-      array      \
+array \
+auto \
+begin \
+bind \
+decltype \
+enum \
+lambda \
+meminit \
+move \
+nullptr \
+rawstring \
+regex \
+static_assert \
+turple \
+type_traits \
       
 #
 .PHONY: all
