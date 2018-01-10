@@ -69,7 +69,9 @@ void bst_print_dot_aux(huys::ADT::Binary_node<int>* node)
         bst_print_dot_aux(node->left);
     }
     else
+    {
         bst_print_dot_null(node->data, nullcount++);
+    }
 
     if (node->right)
     {
@@ -77,7 +79,9 @@ void bst_print_dot_aux(huys::ADT::Binary_node<int>* node)
         bst_print_dot_aux(node->right);
     }
     else
+    {
         bst_print_dot_null(node->data, nullcount++);
+    }
 }
 
 void bst_print_dot(huys::ADT::Binary_node<int>* tree)
@@ -86,12 +90,17 @@ void bst_print_dot(huys::ADT::Binary_node<int>* tree)
     std::cout << "    node [fontname=\"Arial\"];" << std::endl;
 
     if (!tree)
+    {
         std::cout << std::endl;
+    }
     else if (!tree->right && !tree->left)
+    {
         std::cout << "    " << tree->data << std::endl;
+    }
     else
+    {
         bst_print_dot_aux(tree);
-
+    }
     std::cout << "}" << std::endl;
 }
 
@@ -242,6 +251,11 @@ int main()
     cout << "After remove:" << endl;
     cout << "Inorder : ";
     stree.inorder(printTree);
+    cout << endl;
+
+    cout << "-----------------------------------------------------" << endl;
+    huys::ADT::BTree<int> btree;
+
     cout << endl;
 
     return 0;

@@ -23,6 +23,7 @@ CAPTION "Fluent Data Viewer 0.1"
 FONT 8,"Ms Shell Dlg",400,0,0
 BEGIN
     PUSHBUTTON      "Start Gambit",IDC_BN_GAMBIT,25,220,95,30
+    PUSHBUTTON      "Start Notepad",IDC_BN_NOTEPAD,25,260,95,30
     PUSHBUTTON      "Start Fluent",IDC_BN_FLUENT,155,220,95,30
     PUSHBUTTON      "Exit", IDC_BN_EXIT, 285,220,95,30
     PUSHBUTTON      "SendCmd", IDC_BN_SENDCMD,155,260,95,30    

@@ -2,11 +2,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int authenticate_password(ssh_session session)
+int authenticate_password(ssh_session session, const char * password)
 {
-    char *password;
     int rc;
-    password = getpass("Enter your password: ");
     rc = ssh_userauth_password(session, NULL, password);
     if (rc == SSH_AUTH_ERROR)
     {
@@ -35,7 +33,7 @@ int main()
     ssh_options_set(my_ssh_session, SSH_OPTIONS_LOG_VERBOSITY, &verbosity);
     ssh_options_set(my_ssh_session, SSH_OPTIONS_PORT, &port);
 
-     rc = ssh_connect(my_ssh_session);
+    rc = ssh_connect(my_ssh_session);
     if (rc != SSH_OK)
     {
         fprintf(stderr, "Error connecting to localhost: %s\n",

@@ -1,6 +1,6 @@
 @echo off
 
-set FLUENT_INC=D:\GS\Fluent.Inc
+set FLUENT_INC=E:\GS\Fluent.Inc
 
 set FLUENT_ARCH=ntx86
 

@@ -35,10 +35,10 @@
 typedef huys::ADT::UStringAnsi TString;
 
 //
-#define DEFAULT_STARTUP_FILE "G:\\huys\\ulib-win\\app\\ufluent\\fluent.scm"
+#define DEFAULT_STARTUP_FILE "F:\\working\\cxx\\ulib-win\\app\\ufluent\\fluent.scm"
 
 //
-#define DEFAULT_FLUENT_ROOTDIR "C:\\Fluent.Inc"
+#define DEFAULT_FLUENT_ROOTDIR "E:\\GS\\Fluent.Inc"
 #define DEFAULT_FLUENT_ARCH    "ntx86"
 #define DEFAULT_FLUENT_BIDIR   "ntbin"
 
@@ -173,7 +173,7 @@ bool UFluentMan::startExe( LPCTSTR lpFluentDir /*= "D:\\GS\\Fluent.Inc"*/,
     //m_utParam.sCmdline = _T("D:\\GS\\Fluent.Inc\\ntbin\\ntx86\\fluent.exe 2d -i G:\\huys\\ulib-win\\app\\ufluent\\fluent.scm");
     m_utParam.sCmdline = cmdline;
     m_utParam.nMessage = UFM_FINISHED;
-    m_utParam.sWDir = _T("D:\\");
+    m_utParam.sWDir = _T("E:\\");
     m_utParam.lpExitFunc = &check_fluent_session;
     m_utParam.lpExitFuncParam = this;
     spawnNewThreadAndExec(&m_utParam);

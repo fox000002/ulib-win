@@ -30,6 +30,8 @@ public:
     bool change(const DBData &aData);
     bool save();
     bool saveAs(const char *sNewFilename);
+	
+	void print();
 protected:
 private:
     TCHAR m_sFilename[MAX_PATH];

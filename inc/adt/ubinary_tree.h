@@ -512,8 +512,14 @@ class Splay_tree
 
 };
 
-}; // namespace ADT
+template <class T>
+class BTree
+{
 
-}; // namespace huys
+};
+
+} // namespace ADT
+
+} // namespace huys
 
 #endif // U_BINARY_TREE_H

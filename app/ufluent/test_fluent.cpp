@@ -95,6 +95,8 @@ public:
             return UDialogBox::onCancel();
         case IDC_BN_SENDCMD:
             return onBnSendCmd();
+		case IDC_BN_NOTEPAD:
+			return onBnNotepad();
         case IDOK:
         default:
             return UDialogBox::onCommand(wParam, lParam);
@@ -164,13 +166,28 @@ private:
        //Sleep(1000);
        //m_ufm.getResult();
        m_ufm.subclassWnd(m_hDlg);
-       //m_ufm.addMenu();
+       m_ufm.addMenu();
        SetWindowPos(m_hDlg, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE|SWP_NOSIZE);
        m_ufm.focusWnd();
        Sleep(500);
        m_ufm.fetchNewResult();
 
+	   return FALSE;
     }
+	
+	UThreadParam m_utParam;
+	
+	BOOL onBnNotepad()
+	{
+		m_utParam.sCmdline = "C:\\windows\\notepad.exe";
+		m_utParam.nMessage = UFM_FINISHED;
+		m_utParam.sWDir = _T("D:\\");
+		m_utParam.lpExitFunc = NULL;
+		m_utParam.lpExitFuncParam = this;
+		spawnNewThreadAndExec(&m_utParam);
+	
+		return FALSE;
+	}
 };
 
 UDLGAPP_T(UDialogFluent, IDD_FLUENT);

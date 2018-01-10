@@ -1,4 +1,6 @@
 #include "resource.h"
+#include <iostream>
+using namespace std;
 
 #ifndef _MSC_VER
   #error Only msc is supported.
@@ -11,10 +13,8 @@
 
 #pragma comment(lib, "wbemuuid.lib")
 
-#include <iostream>
-using namespace std;
 
-int main(int argc, char **argv)
+int GetWMIDataLocal()
 {
     HRESULT hres;
 
@@ -102,20 +102,20 @@ int main(int argc, char **argv)
     // of the user (client) occurs.
     hres = CoSetProxyBlanket(
 
-       pSvc,                         // the proxy to set
-       RPC_C_AUTHN_WINNT,            // authentication service
-       RPC_C_AUTHZ_NONE,             // authorization service
-       NULL,                         // Server principal name
-       RPC_C_AUTHN_LEVEL_CALL,       // authentication level
-       RPC_C_IMP_LEVEL_IMPERSONATE,  // impersonation level
-       NULL,                         // client identity
-       EOAC_NONE                     // proxy capabilities
-    );
+        pSvc,                         // the proxy to set
+        RPC_C_AUTHN_WINNT,            // authentication service
+        RPC_C_AUTHZ_NONE,             // authorization service
+        NULL,                         // Server principal name
+        RPC_C_AUTHN_LEVEL_CALL,       // authentication level
+        RPC_C_IMP_LEVEL_IMPERSONATE,  // impersonation level
+        NULL,                         // client identity
+        EOAC_NONE                     // proxy capabilities
+        );
 
     if (FAILED(hres))
     {
         cout << "Could not set proxy blanket. Error code = 0x"
-             << hex << hres << endl;
+            << hex << hres << endl;
         pSvc->Release();
         pLoc->Release();
         CoUninitialize();
@@ -138,8 +138,8 @@ int main(int argc, char **argv)
     if (FAILED(hres))
     {
         cout << "Query for processes failed. "
-             << "Error code = 0x"
-             << hex << hres << endl;
+            << "Error code = 0x"
+            << hex << hres << endl;
         pSvc->Release();
         pLoc->Release();
         CoUninitialize();
@@ -175,6 +175,13 @@ int main(int argc, char **argv)
     pSvc->Release();
     pLoc->Release();
     CoUninitialize();
+
+    return 0;
+}
+
+int main(int argc, char *argv[])
+{
+    GetWMIDataLocal();
 
     return 0;   // Program successfully completed.
 }

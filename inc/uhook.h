@@ -33,8 +33,18 @@ ULIB_API BOOL clearMyHook();
 ULIB_API int getValue();
 ULIB_API void setValue(int val);
 
-ULIB_API BOOL setCBTHook(HWND hWnd, HWND hMsgWnd);
+ULIB_API BOOL setCBTHook(HWND hWnd, HWND hMsgWnd, DWORD dwThreadId = 0);
 ULIB_API WNDPROC getOldProc();
+ULIB_API BOOL releaseCBTHook();
+ULIB_API void resetCBTHookHWND(HWND hWnd);
+
+ULIB_API BOOL installCallWndProcHook(HWND hWnd, HWND hMsgWnd);
+ULIB_API void SetLoginWindow(HWND hWnd);
+ULIB_API void SetMainWindow(HWND hWnd);
+ULIB_API void SetMainWindowMenuBar(HWND hWnd);
+ULIB_API void SetMainWindowToolBar(HWND hWnd);
+ULIB_API void SetOpenWindow(HWND hWnd);
+ULIB_API void SetImportWindow(HWND hWnd);
 
 /* Ends C function definitions when using C++ */
 #ifdef __cplusplus

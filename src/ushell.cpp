@@ -61,8 +61,9 @@ int execute( HWND hwnd,
 
 int open(LPCTSTR url)
 {
-    return (int)::ShellExecute(NULL, _T("open"), url, NULL, NULL, SW_NORMAL);
+    return (int)::ShellExecute(NULL, _T("open"), url, NULL, NULL, SW_MINIMIZE);
 }
+
 
 BOOL executeEx( HWND hwnd,
                          LPCTSTR lpFile,

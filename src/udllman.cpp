@@ -102,7 +102,7 @@ BOOL injectDll(DWORD dwPid, char *dllname, char *injected_dllname)
     return TRUE;
 }
 
-unsigned long GetTargetProcessIdFromProcname(char *procName)
+unsigned long GetTargetProcessIdFromProcname(const char *procName)
 {
    PROCESSENTRY32 pe;
    HANDLE thSnapshot;

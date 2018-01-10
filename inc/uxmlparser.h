@@ -527,7 +527,7 @@ private:
     bool isElement()
     {
         if ( _buffer.at(1) < 127 )
-            return isalpha( _buffer.at(1) );
+            return 0 != isalpha( _buffer.at(1) );
         else
             return true;
     }

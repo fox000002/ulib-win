@@ -138,9 +138,9 @@ private:
     entry_type entry[maxqueue];
 };
 
-}; // namespace ADT
+} // namespace ADT
 
-}; // namespace huys
+} // namespace huys
 
 #endif // HU_QUEUE_H
 

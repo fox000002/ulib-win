@@ -21,7 +21,7 @@ private:
 protected:
 
 public:
-    static BOOL runProgram(char *programName = "notepad.exe", DWORD dwTimeout = 5000);
+    static BOOL runProgram(const char *programName = "notepad.exe", DWORD dwTimeout = 5000);
     static LPTSTR getCommadLine();
     static DWORD getCurrentProcessId() {return ::GetCurrentProcessId();}
     static HANDLE getCurrentProcess() {return ::GetCurrentProcess();}

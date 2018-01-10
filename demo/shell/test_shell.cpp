@@ -11,7 +11,7 @@
 #include "ushell.h"
 
 void BrowseFolder(HWND hWnd, LPCTSTR lpTitle)
-{  
+{
     char szPath[MAX_PATH]={0};
     BROWSEINFO m_bi;
 
@@ -40,24 +40,24 @@ void BrowseFolder(HWND hWnd, LPCTSTR lpTitle)
 
 void FileOperation(HWND hWnd, LPCSTR src, LPCSTR dest, LPCSTR title)
 {
-	SHFILEOPSTRUCT FileOp;
-	FileOp.hwnd = hWnd;
-	FileOp.wFunc = FO_COPY;
-	FileOp.pFrom = src;
-	FileOp.pTo = dest;
-	FileOp.fFlags = FOF_ALLOWUNDO;
-	FileOp.hNameMappings = NULL;
-	FileOp.lpszProgressTitle = title;
-	SHFileOperation(&FileOp);
-	if(FileOp.fAnyOperationsAborted)
-		UShell::msgbox(NULL, "Info", "An Operation was aborted!!!\n");
+    SHFILEOPSTRUCT FileOp;
+    FileOp.hwnd = hWnd;
+    FileOp.wFunc = FO_COPY;
+    FileOp.pFrom = src;
+    FileOp.pTo = dest;
+    FileOp.fFlags = FOF_ALLOWUNDO;
+    FileOp.hNameMappings = NULL;
+    FileOp.lpszProgressTitle = title;
+    SHFileOperation(&FileOp);
+    if(FileOp.fAnyOperationsAborted)
+        UShell::msgbox(NULL, "Info", "An Operation was aborted!!!\n");
 }
 
 class UMyWindow : public UBaseWindow
 {
     enum {
         ID_BN_EXEC   = 1111,
-		ID_BN_FOLDER = 1112
+        ID_BN_FOLDER = 1112
     };
 public:
     UMyWindow()
@@ -67,7 +67,7 @@ public:
         this->setPos(0, 0, 800, 600);
     }
 
-    /* virtual */  LRESULT	onPreRegisterWindowClass(huys::UWindowClass &uwc)
+    /* virtual */  LRESULT    onPreRegisterWindowClass(huys::UWindowClass &uwc)
     {
         uwc.setBKBrush((HBRUSH)::GetStockObject(GRAY_BRUSH));
         return TRUE;
@@ -81,8 +81,8 @@ public:
         _bnExec->setPos(100, 100, 100, 50);
         _bnExec->create();
         _bnExec->setWindowText(_T("notepad"));
-		
-		_bnFolder = new UButton(this, ID_BN_FOLDER);
+
+        _bnFolder = new UButton(this, ID_BN_FOLDER);
         _bnFolder->setPos(100, 200, 100, 50);
         _bnFolder->create();
         _bnFolder->setWindowText(_T("folder"));
@@ -107,27 +107,27 @@ public:
         {
         case ID_BN_EXEC:
             return onBnExec();
-		case ID_BN_FOLDER:
-			return onBnFolder();
+        case ID_BN_FOLDER:
+            return onBnFolder();
         default:
             return UBaseWindow::onCommand(wParam, lParam);
         }
     }
 private:
     AUI::UButtonP _bnExec;
-	AUI::UButtonP _bnFolder;
+    AUI::UButtonP _bnFolder;
 private:
     BOOL onBnExec()
     {
         UShell::execute(NULL, "notepad");
         return FALSE;
     }
-	
-	BOOL onBnFolder()
-	{
-		BrowseFolder(*this, "Select Folder");
-        return FALSE;	
-	}
+
+    BOOL onBnFolder()
+    {
+        BrowseFolder(*this, "Select Folder");
+        return FALSE;
+    }
 };
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR lpszCmdLine, int nCmdShow)

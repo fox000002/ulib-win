@@ -75,9 +75,9 @@ SET (ULIB_LIB_TARGET              ${ULIB_LIB_NAME}${LIBPOSTFIX})
 #-----------------------------------------------------------------------------
 SET (ULIB_INCLUDE_DIRECTORIES
     ${ULIB_INC_DIR}
-	${ULIB_ICON_DIR}
-	${ULIB_RESOURCES_DIR}
-	${ULIB_FIX_DIR}
+    ${ULIB_ICON_DIR}
+    ${ULIB_RESOURCES_DIR}
+    ${ULIB_FIX_DIR}
 )
 INCLUDE_DIRECTORIES (${ULIB_INCLUDE_DIRECTORIES})
 
@@ -92,6 +92,11 @@ OPTION (BUILD_TEST "Build Test" OFF)
 IF (BUILD_TEST)
 add_subdirectory(test)
 ENDIF(BUILD_TEST)
+
+OPTION (BUILD_APP "Build App" OFF)
+IF (BUILD_APP)
+add_subdirectory(app)
+ENDIF(BUILD_APP)
 
 OPTION (ENABLE_DEBUG "Enable Debug" OFF)
 
@@ -113,7 +118,7 @@ SET (LIBRARY_OUTPUT_PATH ${CMAKE_LIBRARY_OUTPUT_DIRECTORY})
 
 # ------------------------- Begin Generic CMake Variable Logging ------------------
 
-# /*	C++ comment style not allowed	*/
+# /*    C++ comment style not allowed    */
 
 
 # if you are building in-source, this is the same as CMAKE_SOURCE_DIR, otherwise 
@@ -204,6 +209,9 @@ MESSAGE( STATUS "MSVC60: " ${MSVC60} )
 MESSAGE( STATUS "MSVC70: " ${MSVC70} )
 MESSAGE( STATUS "MSVC71: " ${MSVC71} )
 MESSAGE( STATUS "MSVC80: " ${MSVC80} )
+MESSAGE( STATUS "MSVC90: " ${MSVC90} )
+MESSAGE( STATUS "MSVC10: " ${MSVC10} )
+MESSAGE( STATUS "MSVC11: " ${MSVC11} )
 MESSAGE( STATUS "CMAKE_COMPILER_2005: " ${CMAKE_COMPILER_2005} )
 
 

@@ -128,6 +128,13 @@ int get_io_bytes(uint64_t* read_bytes, uint64_t* write_bytes)
 */
 
 
+void listInstalledApp()
+{
+	cout << "Installed Application:" << endl;
+	
+	
+}
+
 int main(int argc, char *argv[])
 {
 
@@ -202,11 +209,8 @@ int main(int argc, char *argv[])
     char buffer[256];
     getXPKey(buffer);
     printf("XP Key: %s\n", buffer);
-
-    //
-    cout << "Press any key to exit..." << endl;
-
-    cin.ignore();
+	
+	listInstalledApp();
 
     return 0;
 }

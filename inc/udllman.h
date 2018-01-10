@@ -199,7 +199,7 @@ namespace DLLInject
 {
     //! Using CreateRemoteThread
     ULIB_API BOOL injectDll(DWORD dwPid, char *dllname, char *injected_dllname);
-    ULIB_API unsigned long GetTargetProcessIdFromProcname(char *procName);
+    ULIB_API unsigned long GetTargetProcessIdFromProcname(const char *procName);
 
     //! Using SetWindowsHookEx
     ULIB_API unsigned long GetTargetProcessIdFromWindow(char *className, char *windowName);

@@ -9,9 +9,9 @@ public:
     UPipe();
     virtual ~UPipe();
     virtual BOOL create();
-    BOOL startChild(char *lpszChildName = "child.exe");
+    BOOL startChild(const char *lpszChildName = "child.exe");
     virtual void write(){};
-    virtual void read(char *sOutFilename = "out.dat");
+    virtual void read(const char *sOutFilename = "out.dat");
 private:
     char m_szReadBuffer[256];
     DWORD m_nReadNum;

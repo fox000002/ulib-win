@@ -38,7 +38,7 @@ public:
     ~UFluentMan();
 
     //
-    bool startExe(LPCTSTR lpFluentDir = "D:\\GS\\Fluent.Inc", LPCTSTR lpStartup = "fluent.scm");
+    bool startExe(LPCTSTR lpFluentDir = "E:\\GS\\Fluent.Inc", LPCTSTR lpStartup = "fluent.scm");
     bool exitExe();
 
     //

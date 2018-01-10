@@ -26,7 +26,7 @@ BOOL UPipe::create()
     return ::CreatePipe(&m_hRead, &m_hWrite, &saAttr, 0);
 }
 
-BOOL UPipe::startChild(char *lpszChildName)
+BOOL UPipe::startChild(const char *lpszChildName)
 {
     // Set up members of the PROCESS_INFORMATION structure.
     ::ZeroMemory( &m_piChild, sizeof(PROCESS_INFORMATION) );
@@ -47,7 +47,7 @@ BOOL UPipe::startChild(char *lpszChildName)
 
     BOOL bRet;
     bRet = CreateProcess( NULL,
-                          lpszChildName,
+                          (LPTSTR)lpszChildName,
                           NULL,
                           NULL,
                           TRUE,
@@ -69,7 +69,7 @@ BOOL UPipe::startChild(char *lpszChildName)
     return bRet;
 }
 
-void UPipe::read(char *sOutFilename /* = "out.dat" */)
+void UPipe::read(const char *sOutFilename /* = "out.dat" */)
 {
     FILE *fp;
     fp = fopen(sOutFilename, "w");

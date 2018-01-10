@@ -139,3 +139,8 @@ BOOL UEdit::showBalloonTip(LPCWSTR pszTitle, LPCWSTR pszText, INT nIcon)
    
     return this->sendMsg(EM_SHOWBALLOONTIP, 0, (LPARAM)&ebt);
 }
+
+LONG UEdit::scrollToEnd()
+{
+    return this->sendMsg(EM_LINESCROLL, 0,  (LPARAM)this->getLineCount());
+}

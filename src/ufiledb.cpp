@@ -3,6 +3,7 @@
 
 #include "ufiledb.h"
 
+#include <iostream>
 #include <fstream>
 #include <cassert>
 #include <cstring>
@@ -143,4 +144,10 @@ bool UFileDB::saveAs( const char *sNewFilename )
     return true;
 }
 
-
+void UFileDB::print()
+{
+	for(m_pRecord=m_pHead; m_pRecord != 0; m_pRecord = m_pRecord->next)
+    {
+        std::cout << m_pRecord->data.name << " : " << m_pRecord->data.description << std::endl;
+    }	
+}

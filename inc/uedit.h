@@ -33,6 +33,8 @@ public:
     LONG scrollLineUp();
     LONG scrollPageDown();
     LONG scrollPageUp();
+
+    LONG scrollToEnd();
     //
     BOOL setLimitText(int n);
     BOOL limitText(int n);

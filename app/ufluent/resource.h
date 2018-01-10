@@ -10,3 +10,4 @@
 #define IDC_BN_FLUENT                     3002
 #define IDC_BN_EXIT                       3003
 #define IDC_BN_SENDCMD                    3004
+#define IDC_BN_NOTEPAD                    3005

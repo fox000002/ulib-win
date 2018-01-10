@@ -81,7 +81,7 @@ HANDLE hStdError;
 }STARTUPINFO, *LPSTARTUPINFO;
 */
 
-BOOL UProcess::runProgram(char *programName /* = "notepad.exe" */, DWORD dwTimeout /* = 5000 */ )
+BOOL UProcess::runProgram(const char *programName /* = "notepad.exe" */, DWORD dwTimeout /* = 5000 */ )
 {
     STARTUPINFO si;
     PROCESS_INFORMATION pi;
@@ -95,7 +95,7 @@ BOOL UProcess::runProgram(char *programName /* = "notepad.exe" */, DWORD dwTimeo
     ::ZeroMemory( &pi, sizeof(pi) );
 
     bResult = ::CreateProcess(NULL,
-        programName,
+        (LPTSTR)programName,
         NULL,
         NULL,
         TRUE,
