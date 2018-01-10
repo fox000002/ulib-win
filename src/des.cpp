@@ -245,9 +245,9 @@ void des::encrypt_decrypt(unsigned char data[DES_DATA_SIZE],
     }
     /* S-Box substitutions */
     {
-#define index(n) (sbuffer[n]<<5+2 | sbuffer[n+5]<<4+2 | \
-        sbuffer[n+1]<<3+2 | sbuffer[n+2]<<2+2 | sbuffer[n+3]<<1+2 | \
-        sbuffer[n+4]<<0+2)
+#define index(n) ( ((sbuffer[n]<<5)+2) | ((sbuffer[n+5]<<4)+2) | \
+        ((sbuffer[n+1]<<3)+2) | ((sbuffer[n+2]<<2)+2) | ((sbuffer[n+3]<<1)+2) | \
+        ((sbuffer[n+4]<<0)+2))
       pbuffer.dword[0] = * (DWORD *) (MODIFIED_SBOX_1 + index(0));
       pbuffer.dword[1] = * (DWORD *) (MODIFIED_SBOX_2 + index(6));
       pbuffer.dword[2] = * (DWORD *) (MODIFIED_SBOX_3 + index(12));

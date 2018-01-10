@@ -28,7 +28,12 @@
 #include "ulib.h"
 
 #include <uxtheme.h>
+
+#ifdef _MSC_VER 
 #include "fix/tmschema.h"
+#else
+#include <tmschema.h>
+#endif
 
 namespace VisualStyles
 {
@@ -55,11 +60,11 @@ public:
                         const RECT *lpClipRect = NULL);
 
     BOOL drawEdge( HDC dc,
-                   LPRECT lpRect, 
-                   UINT uEdge = EDGE_BUMP, 
-                   UINT uFlags = BF_RECT, 
-                   int iPartID = BP_PUSHBUTTON, 
-                   int iStateID = PBS_HOT, 
+                   LPRECT lpRect,
+                   UINT uEdge = EDGE_BUMP,
+                   UINT uFlags = BF_RECT,
+                   int iPartID = BP_PUSHBUTTON,
+                   int iStateID = PBS_HOT,
                    LPRECT lpClipRect = NULL);
 
      BOOL drawText( HDC hdc,

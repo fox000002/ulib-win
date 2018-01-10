@@ -83,7 +83,7 @@ inline HRESULT HuCoCreateInstance(
       IClassFactory *pIFactory;
 
 #if  defined(_MSC_VER) && _MSC_VER <= 1200
-      
+
       HMODULE hDll = ::LoadLibrary(szDllName);
       if (hDll == 0)
           return hr;
@@ -121,7 +121,7 @@ inline HRESULT HuCoCreateInstance(
 }
 
 //
-class UCoObject
+class ULIB_API UCoObject
 {
 public:
     virtual void * acquireInterface (IID const & iid) = 0;
@@ -175,7 +175,7 @@ public:
         if(_iUnk)
             _iUnk->Release ();
     }
-	
+
     void * acquireInterface (IID const & iid);
 /*    {
         void * p = 0;
@@ -322,8 +322,8 @@ public:
     BString ()
         :_str (0)
     {}
-    
-	BString (VARIANT & var)
+
+    BString (VARIANT & var)
     {
         if (var.vt != VT_BSTR)
         {
@@ -331,11 +331,11 @@ public:
         }
         _str = var.bstrVal;
     }
-    
-	BString (const WCHAR * str)
+
+    BString (const WCHAR * str)
         :_str (::SysAllocString (str))
     {}
-	
+
     ~BString ()
     {
         // Works for null string, too.
@@ -356,8 +356,8 @@ public:
         wcstombs (_str, bstr._str, _len);
         _str [_len] = '\0';
     }
-    
-	~CString ()
+
+    ~CString ()
     {
         delete []_str;
     }
@@ -368,7 +368,7 @@ public:
         return strcmp (str, _str) == 0;
     }
 
-	const char * str() const {return _str;}
+    const char * str() const {return _str;}
 protected:
     char * _str;
     int    _len;

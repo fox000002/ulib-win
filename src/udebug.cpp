@@ -29,16 +29,16 @@ void odprintf(const char *format, ...)
     ::OutputDebugStringA(buf);
 }
 
-#ifndef MUTEX_QUERY_STATE 
+#ifndef MUTEX_QUERY_STATE
 #define MUTEX_QUERY_STATE (1)
 #endif // MUTEX_QUERY_STATE
 
 HANDLE setup_mutex(void)
 {
-    SID_IDENTIFIER_AUTHORITY SIAWindowsNT = SECURITY_NT_AUTHORITY;
-    SID_IDENTIFIER_AUTHORITY SIAWorld     = SECURITY_WORLD_SID_AUTHORITY;
+	SID_IDENTIFIER_AUTHORITY SIAWindowsNT = {SECURITY_NT_AUTHORITY};
+	SID_IDENTIFIER_AUTHORITY SIAWorld     = {SECURITY_WORLD_SID_AUTHORITY};
 
-    SID     *pSidSYSTEM   = 0,      // 
+    SID     *pSidSYSTEM   = 0,      //
             *pSidAdmins   = 0,
             *pSidEveryone = 0;
 
@@ -119,7 +119,7 @@ void UOutputDebugStringA(char *lpString)
     HANDLE        hBufferEvent = 0;
     HANDLE        hDataEvent   = 0;
 
-	// if we can't make or acquire the mutex, we're done
+    // if we can't make or acquire the mutex, we're done
 
         if ( hDbwinMutex == 0 )
                 hDbwinMutex = setup_mutex();
@@ -142,21 +142,21 @@ void UOutputDebugStringA(char *lpString)
         hDataEvent   = OpenEvent( EVENT_MODIFY_STATE, FALSE, "DBWIN_DATA_READY");
 
         const char *p  = lpString;
-        int        len = strlen(lpString);
+        unsigned int len = strlen(lpString);
 
         while ( len > 0 )
         {
                 if ( WaitForSingleObject(hBufferEvent, 10*1000) != WAIT_OBJECT_0 )
-		{
-			/* ERROR: give up */
-			break;
-		}
+        {
+            /* ERROR: give up */
+            break;
+        }
 
-		// populate the shared memory segment. The string
-		// is limited to 4k or so.
+        // populate the shared memory segment. The string
+        // is limited to 4k or so.
        pDBBuffer->dwProcessId = GetCurrentProcessId();
 
-       int n = min(len, sizeof(pDBBuffer->data)-1);
+       unsigned int n = min(len, sizeof(pDBBuffer->data)-1);
 
        memcpy(pDBBuffer->data, p, n);
        pDBBuffer->data[n] = '\0';
@@ -167,11 +167,11 @@ void UOutputDebugStringA(char *lpString)
        SetEvent(hDataEvent);
     }
 
-	// cleanup after ourselves
-	CloseHandle(hBufferEvent);
-	CloseHandle(hDataEvent);
-	UnmapViewOfFile(pDBBuffer);
-	CloseHandle(hFileMap);
+    // cleanup after ourselves
+    CloseHandle(hBufferEvent);
+    CloseHandle(hDataEvent);
+    UnmapViewOfFile(pDBBuffer);
+    CloseHandle(hFileMap);
 }
 
 } // namespace UDebugger

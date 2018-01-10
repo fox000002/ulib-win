@@ -207,7 +207,7 @@ void UIPHelp::printIPAddrTable()
         IPAddr.S_un.S_addr = (u_long) m_pIPAddrTable->table[i].dwMask;
         printf("\tSubnet Mask[%d]:    \t%s\n", i, inet_ntoa(IPAddr) );
         IPAddr.S_un.S_addr = (u_long) m_pIPAddrTable->table[i].dwBCastAddr;
-        printf("\tBroadCast[%d]:      \t%s (%ld%)\n", i, inet_ntoa(IPAddr), m_pIPAddrTable->table[i].dwBCastAddr);
+        printf("\tBroadCast[%d]:      \t%s (%ld%%)\n", i, inet_ntoa(IPAddr), m_pIPAddrTable->table[i].dwBCastAddr);
         printf("\tReassembly size[%d]:\t%ld\n", i, m_pIPAddrTable->table[i].dwReasmSize);
         printf("\tType and State[%d]:", i);
         if (m_pIPAddrTable->table[i].wType & MIB_IPADDR_PRIMARY)

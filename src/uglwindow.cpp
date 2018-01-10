@@ -15,13 +15,13 @@ UGLWindow::UGLWindow(HINSTANCE hInst)
 : UBaseWindow(NULL, hInst), m_hdc(0), m_hrc(0), m_bFullscreen(FALSE)
 {
     setTitle(_T("OpenGL Window"));
-    
+
     _init_func = 0;
     _disp_func = 0;
     _reshape_func = 0;
-    
+
     _post_create = 0;
-    
+
     m_uInterval = 100;
 }
 
@@ -40,10 +40,10 @@ LRESULT UGLWindow::onPreCreateWindow()
 
         int width= 640;
         int height = 480;
-        int bits=16;
+        //int bits=16;
 
         setPos(0, 0, width, height);
-        
+
         if (m_bFullscreen && !UGlut::check_fullscreen(m_bFullscreen))
             return FALSE;
 
@@ -74,19 +74,19 @@ LRESULT UGLWindow::onPreCreateWindow()
 BOOL UGLWindow::onCreate()
 {
     UGlut::EnableOpenGL(*this, m_hdc, m_hrc);
-    
+
     if (0 != _init_func)
     {
         (*_init_func)();
     }
-    
+
     this->setTimer(ID_TIMER_INTERNAL, m_uInterval);
-    
+
     if (0 != _post_create)
     {
         _post_create(this);
     }
-    
+
     return UBaseWindow::onCreate();
 }
 
@@ -133,7 +133,7 @@ BOOL UGLWindow::onTimer(WPARAM wParam, LPARAM lParam)
 {
     if (wParam == ID_TIMER_INTERNAL)
     {
-		wglMakeCurrent(m_hdc, m_hrc );
+        wglMakeCurrent(m_hdc, m_hrc );
         render();
         // Swap buffers
         SwapBuffers(m_hdc);

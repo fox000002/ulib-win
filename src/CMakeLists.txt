@@ -15,15 +15,24 @@ if (MINGW)
   else (BUILD_SHARED_LIBS)
     ADD_DEFINITIONS("-ansi -Wall -DBUILD_STATIC")
   endif(BUILD_SHARED_LIBS)
+  IF (ENABLE_DEBUG)
+    ADD_DEFINITIONS("-DHU_DEBUG")
+  ENDIF(ENABLE_DEBUG)
 endif (MINGW)
 
 if (MSVC)
   if (BUILD_SHARED_LIBS)
-  ADD_DEFINITIONS("/c  /DBUILD_DLL")
-    else (BUILD_SHARED_LIBS)
-	 ADD_DEFINITIONS("/c /DBUILD_STATIC")
-	  endif(BUILD_SHARED_LIBS)
+    ADD_DEFINITIONS("/c  /DBUILD_DLL")
+  else (BUILD_SHARED_LIBS)
+	ADD_DEFINITIONS("/c /DBUILD_STATIC")
+  endif(BUILD_SHARED_LIBS)
+  
+  IF (ENABLE_DEBUG)
+    ADD_DEFINITIONS("/DHU_DEBUG")
+  ENDIF(ENABLE_DEBUG)
+
 endif (MSVC)
+
 
 #-----------------------------------------------------------------------------
 # 

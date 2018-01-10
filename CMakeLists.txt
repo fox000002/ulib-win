@@ -92,6 +92,8 @@ IF (BUILD_TEST)
 add_subdirectory(test)
 ENDIF(BUILD_TEST)
 
+OPTION (ENABLE_DEBUG "Enable Debug" OFF)
+
 #-----------------------------------------------------------------------------
 #
 #
