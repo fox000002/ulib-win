@@ -356,7 +356,8 @@ public:
         wcstombs (_str, bstr._str, _len);
         _str [_len] = '\0';
     }
-    ~CString ()
+    
+	~CString ()
     {
         delete []_str;
     }
