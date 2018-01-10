@@ -30,6 +30,7 @@ SUBDIRS = \
           sstorage  \
           bho       \
           ado       \
+		  typelib   \
           
 
 #

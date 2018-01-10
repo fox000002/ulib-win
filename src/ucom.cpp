@@ -55,15 +55,21 @@ TypeLibrary::TypeLibrary (WCHAR * path)
     if (FAILED (hr))
     {
         if (hr == TYPE_E_CANTLOADLIBRARY)
-            _iLib = 0;
-        else
-            throw HEx (hr, "Couldn't load type library");
+        {
+			_iLib = 0;
+        }
+		else
+        {
+			throw HEx (hr, "Couldn't load type library");
+		}
     }
     if (_iLib != 0)
     {
         hr = RegisterTypeLib (_iLib, path, 0);
         if (FAILED (hr))
-            throw HEx (hr, "Couldn't register type library");
+        {
+			throw HEx (hr, "Couldn't register type library");
+		}
     }
 }
 
@@ -77,8 +83,10 @@ ITypeInfo * TypeLibrary::GetTypeInfo (int idx)
     ITypeInfo * info;
     HRESULT hr = _iLib->GetTypeInfo (idx, &info);
     if (FAILED (hr))
-        throw HEx (hr, "Couldn't get type info");
-    return info;
+    {
+		throw HEx (hr, "Couldn't get type info");
+    }
+	return info;
 }
 
 ITypeInfo * TypeLibrary::GetTypeInfo (WCHAR * name)
@@ -88,10 +96,15 @@ ITypeInfo * TypeLibrary::GetTypeInfo (WCHAR * name)
     unsigned short cFound = 1; // look for first match only
     HRESULT hr = _iLib->FindName (name, 0, &info, &id, &cFound);
     if (hr == TYPE_E_ELEMENTNOTFOUND)
-        throw "Name not found in library";
-    if (FAILED (hr) || info == 0)
-        throw HEx (hr, "Couldn't find type info by name");
-    return info;
+    {
+		throw "Name not found in library";
+    }
+	
+	if (FAILED (hr) || info == 0)
+    {
+		throw HEx (hr, "Couldn't find type info by name");
+    }
+	return info;
 }
 
 //
@@ -103,7 +116,9 @@ TypeInfo::TypeInfo (TypeLibrary & lib, int idx)
 {
     HRESULT hr = _i->GetTypeAttr (&_attr);
     if (FAILED (hr))
-        throw HEx (hr, "Couldn't get type attributes");
+    {
+		throw HEx (hr, "Couldn't get type attributes");
+	}
 }
 
 TypeInfo::TypeInfo (TypeLibrary & lib, WCHAR * name)
@@ -111,7 +126,9 @@ TypeInfo::TypeInfo (TypeLibrary & lib, WCHAR * name)
 {
     HRESULT hr = _i->GetTypeAttr (&_attr);
     if (FAILED (hr))
-        throw HEx (hr, "Couldn't get type attributes");
+    {
+		throw HEx (hr, "Couldn't get type attributes");
+	}
 }
 
 void * TypeInfo::CreateInstance (IID const & iid)

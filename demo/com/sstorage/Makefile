@@ -8,7 +8,7 @@ include $(TOPDIR)/make.inc
 CFLAGS =
 CXXFLAGS = 
 INCS = -I"$(TOPDIR)/inc" -I"."
-LIBS = -L"$(TOPDIR)/lib" 
+LIBS = -L"$(TOPDIR)/lib" -lole32 -loleaut32
 
 #
 OBJ = test_sstorage.o
@@ -23,7 +23,7 @@ all: $(BIN)
 
 #
 test_sstorage.exe : test_sstorage.o
-	$(CXX) -o $@ $< -loleaut32
+	$(CXX) -o $@ $< $(LIBS)
   
 #
 clean :

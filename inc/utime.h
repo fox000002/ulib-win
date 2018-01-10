@@ -52,5 +52,17 @@ private:
     SYSTEMTIME m_st;
 };
 
+class ULIB_API UFileTime
+{
+public:
+	UFileTime();
+	~UFileTime();
+	//
+    operator LPFILETIME ()
+    { return &m_ft;}
+private:
+	FILETIME m_ft;
+};
+
 #endif // U_TIME_H
 

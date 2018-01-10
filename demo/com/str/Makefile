@@ -25,7 +25,7 @@ all: $(BIN)
 
 #
 str.exe : str.o
-	$(CXX) -o $@ $< -loleaut32
+	$(CC) -o $@ $< -loleaut32
 	
 #
 %.o : %.c

@@ -322,7 +322,8 @@ public:
     BString ()
         :_str (0)
     {}
-    BString (VARIANT & var)
+    
+	BString (VARIANT & var)
     {
         if (var.vt != VT_BSTR)
         {
@@ -330,9 +331,11 @@ public:
         }
         _str = var.bstrVal;
     }
-    BString (const WCHAR * str)
+    
+	BString (const WCHAR * str)
         :_str (::SysAllocString (str))
     {}
+	
     ~BString ()
     {
         // Works for null string, too.
@@ -391,7 +394,7 @@ public:
         return _iLib->GetTypeInfoCount ();
     }
     void GetDocumentation (int idx, BString & name, BString & doc);
-private:
+//private:
     ITypeInfo * GetTypeInfo (int idx);
     ITypeInfo * GetTypeInfo (WCHAR * name);
 private:
@@ -401,7 +404,7 @@ private:
 //
 // Type info for a given element of the library
 //
-class TypeInfo: public USmartFace<ITypeInfo>
+class ULIB_API TypeInfo: public USmartFace<ITypeInfo>
 {
     friend class USmartObject;
 public:
@@ -413,7 +416,7 @@ public:
     }
     GUID & GetGuid () const { return _attr->guid; }
     void GetDocumentation (BString & name, BString & doc);
-private:
+//private:
     void * CreateInstance (IID const & iid);
 private:
     TYPEATTR  * _attr;

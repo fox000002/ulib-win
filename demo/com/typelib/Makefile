@@ -8,7 +8,7 @@ include $(TOPDIR)/make.inc
 CFLAGS =
 CXXFLAGS += -DBUILD_EXE
 INCS = -I"$(TOPDIR)/inc" -I.
-LIBS = -L"$(TOPDIR)/lib" -luwin
+LIBS = -L"$(TOPDIR)/lib" -luwin -loleaut32
 
 
 #

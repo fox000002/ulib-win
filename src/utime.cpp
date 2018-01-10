@@ -17,3 +17,11 @@ void UTime::getLocalTime()
 {
     ::GetLocalTime(&m_st);
 }
+
+UFileTime::UFileTime()
+{}
+
+
+UFileTime::~UFileTime()
+{}
+
