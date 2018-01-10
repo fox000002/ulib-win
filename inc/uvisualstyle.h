@@ -28,7 +28,7 @@
 #include "ulib.h"
 
 #include <uxtheme.h>
-#include <tmschema.h>
+#include "fix/tmschema.h"
 
 namespace VisualStyles
 {

@@ -13,17 +13,17 @@ UCursor::~UCursor()
 
 bool UCursor::destroy()
 {
-    return ::DestroyCursor((HCURSOR)m_hObj);
+    return ::DestroyCursor((HCURSOR)m_hObj) != FALSE;
 }
 
 bool UCursor::getCursorInfo()
 {
-    return ::GetCursorInfo(&m_cursorInfo);
+    return ::GetCursorInfo(&m_cursorInfo) != FALSE;
 }
 
 bool UCursor::getCursorPos(LPPOINT lpPoint)
 {
-    return ::GetCursorPos(lpPoint);
+    return ::GetCursorPos(lpPoint) != FALSE;
 }
 
 HCURSOR UCursor::getCursor()
@@ -87,12 +87,12 @@ bool UCursor::restore()
 
 bool UCursor::getClipCursor(LPRECT lpRect)
 {
-    return ::GetClipCursor(lpRect);
+    return ::GetClipCursor(lpRect) != FALSE;
 }
 
 bool UCursor::clipCursor(const RECT *lpRect)
 {
-    return ::ClipCursor(lpRect);
+    return ::ClipCursor(lpRect) != FALSE;
 }
 
 bool UCursor::copy(HCURSOR hCursor)
@@ -104,5 +104,5 @@ bool UCursor::copy(HCURSOR hCursor)
 
 bool UCursor::setPos(int x, int y)
 {
-    return ::SetCursorPos(x, y);
+    return ::SetCursorPos(x, y) != FALSE;
 }

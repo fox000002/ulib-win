@@ -37,7 +37,7 @@ void UTimer::beginQuery()
 {
     LARGE_INTEGER litmp;
 
-    bool OK = QueryPerformanceFrequency(&litmp);
+    bool OK = (FALSE != ::QueryPerformanceFrequency(&litmp));
     if (OK){
         freqence = litmp.QuadPart;
         QueryPerformanceCounter(&litmp);

@@ -1,3 +1,5 @@
 add_subdirectory(window)
 add_subdirectory(winx)
 add_subdirectory(richedit)
+add_subdirectory(button)
+add_subdirectory(console)

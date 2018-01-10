@@ -10,6 +10,24 @@
 
 using namespace UConsole;
 
+void testProgress()
+{
+    int total = 1000;
+    int step = 0;
+
+    while ( step < total )
+    {
+        //do some action
+        ::Sleep( 50 );
+
+        step+=1;
+
+        DoProgress( "Download: ", step, total );
+    }
+
+    printf( "\n" );
+}
+
 int main(int argc, char *argv[])
 {
     int i;
@@ -86,6 +104,8 @@ int main(int argc, char *argv[])
     getchar();
 
     ReportError("XXXXX", 0, TRUE);
+
+    testProgress();
 
     return 0;
 }

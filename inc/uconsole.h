@@ -89,6 +89,8 @@ typedef enum tagCaretShape {
 
 void ULIB_API setCaret(CaretShape cs, HANDLE hOut);
 
+void ULIB_API DoProgress( const TCHAR * label, int step, int total );
+
 class ULIB_API UConsole
 {
 public:

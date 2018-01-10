@@ -391,8 +391,6 @@ int do_amd(void) {
 int main()
 {
     detect_cpu();
-
-    getchar();
     return 0;
 }
 

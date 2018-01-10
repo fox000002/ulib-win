@@ -18,6 +18,10 @@ SET (ULIB_SRC_DIR            ${ULIB_SOURCE_DIR}/src)
 SET (ULIB_TEST_SOURCE_DIR    ${ULIB_SOURCE_DIR}/test)
 SET (ULIB_INC_DIR            ${ULIB_SOURCE_DIR}/inc)
 SET (ULIB_ICON_DIR           ${ULIB_SOURCE_DIR}/ico)
+SET (ULIB_FIX_DIR)
+IF (MSVC)
+  SET (ULIB_FIX_DIR     ${ULIB_SOURCE_DIR}/vc)
+ENDIF (MSVC)
 
 #-----------------------------------------------------------------------------
 # Option to Build Shared/Static libs, default is static
@@ -72,6 +76,7 @@ SET (ULIB_INCLUDE_DIRECTORIES
     ${ULIB_INC_DIR}
 	${ULIB_ICON_DIR}
 	${ULIB_RESOURCES_DIR}
+	${ULIB_FIX_DIR}
 )
 INCLUDE_DIRECTORIES (${ULIB_INCLUDE_DIRECTORIES})
 
@@ -81,6 +86,11 @@ OPTION (BUILD_DEMO "Build Demo" OFF)
 IF (BUILD_DEMO)
 add_subdirectory(demo)
 ENDIF(BUILD_DEMO)
+
+OPTION (BUILD_TEST "Build Test" OFF)
+IF (BUILD_TEST)
+add_subdirectory(test)
+ENDIF(BUILD_TEST)
 
 #-----------------------------------------------------------------------------
 #

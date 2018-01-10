@@ -2,7 +2,7 @@
 // DES Encryption and Decryption
 // from efgh.com/software
 
-#include <mem.h>
+#include <memory.h>
 #include "crypto/des.h"
 
 namespace huys

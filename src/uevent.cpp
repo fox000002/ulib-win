@@ -28,11 +28,11 @@ bool UEvent::open()
 
 bool UEvent::set()
 {
-    return ::SetEvent(m_hObj);
+    return ::SetEvent(m_hObj) != FALSE;
 }
 
 bool UEvent::reset()
 {
-    return ::ResetEvent(m_hObj);
+    return ::ResetEvent(m_hObj) != FALSE;
 }
 

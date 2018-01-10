@@ -358,25 +358,69 @@ void setrgb(ColorOnColor color)
 
 void setCaret(CaretShape cs, HANDLE hOut)
 {
-	CONSOLE_CURSOR_INFO info;
-	info.dwSize = 1;
-	info.bVisible = TRUE;
+    CONSOLE_CURSOR_INFO info;
+    info.dwSize = 1;
+    info.bVisible = TRUE;
 
-	switch (cs)
+    switch (cs)
     {
     case CARET_NONE:
-		info.bVisible = FALSE;
-		break;
-	case CARET_SOLID:
-		info.dwSize = 100;
-		break;
-	case CARET_NORMAL:
-		break;
-	default:
-		return;
+        info.bVisible = FALSE;
+        break;
+    case CARET_SOLID:
+        info.dwSize = 100;
+        break;
+    case CARET_NORMAL:
+        break;
+    default:
+        return;
     }
-	::SetConsoleCursorInfo (hOut, &info);
+    ::SetConsoleCursorInfo (hOut, &info);
 }
+
+
+void DoProgress( const TCHAR * label, int step, int total )
+{
+    //progress width
+    const int pwidth = 72;
+
+    //minus label len
+    int width = pwidth - lstrlen( label );
+    int pos = ( step * width ) / total ;
+
+
+    int percent = ( step * 100 ) / total;
+
+    //set green text color, only on Windows
+    SetConsoleTextAttribute(  GetStdHandle( STD_OUTPUT_HANDLE ), FOREGROUND_GREEN );
+    PrintStdoutFormat(_T("%s["), label );
+
+    //fill progress bar with =
+    for ( int i = 0; i < pos; i++ )
+    {
+        PrintStdoutFormat(_T("%c"), _T('=') );
+    }
+
+    //fill progress bar with spaces
+    PrintStdoutFormat( _T("% *c"), width - pos + 1, _T(']') );
+    PrintStdoutFormat( _T(" %3d%%\r"), percent );
+
+    //reset text color, only on Windows
+    SetConsoleTextAttribute(  GetStdHandle( STD_OUTPUT_HANDLE ), 0x08 );
+}
+
+
+
+UConsole::~UConsole()
+{
+
+}
+
+UConsole::UConsole()
+{
+
+}
+
 
 }; // namespace UConsole
 
