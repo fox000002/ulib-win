@@ -74,7 +74,7 @@ public:
         return FALSE;
     }
 
-    BOOL filterMessage(UINT uMessage, WPARAM wParam, LPARAM lParam)
+    LRESULT filterMessage(UINT uMessage, WPARAM wParam, LPARAM lParam)
     {
         if (WM_ERASEBKGND == uMessage)
         {

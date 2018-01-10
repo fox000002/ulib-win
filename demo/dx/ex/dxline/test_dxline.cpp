@@ -74,14 +74,14 @@ private:
         if((pD3D = Direct3DCreate9(D3D_SDK_VERSION))==NULL){
             return false;
         }
-		
-		BOOL bFullscreen = false;
-		
-		if (IDYES == showYesNoMsgbox(_T("Fullscreen?"), _T("Start Fullscreen?")))
+
+        BOOL bFullscreen = false;
+
+        if (IDYES == showYesNoMsgbox(_T("Fullscreen?"), _T("Start Fullscreen?")))
         {
             bFullscreen = TRUE;
         }
-		
+
         D3DDISPLAYMODE d3ddm;
         pD3D->GetAdapterDisplayMode(D3DADAPTER_DEFAULT, &d3ddm);
         D3DPRESENT_PARAMETERS d3dpp;
@@ -94,7 +94,7 @@ private:
         d3dpp.BackBufferHeight = 768;
 
         if(FAILED(pD3D->CreateDevice( D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL,
-            *this, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &pDevice))){
+                        *this, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &pDevice))){
             return false;
         }
 
@@ -106,24 +106,29 @@ private:
         // create the vertices using the CUSTOMVERTEX struct
         CUSTOMVERTEX vertices[] =
         {
-            { 400.0f, 62.5f, 0.5f, 1.0f, D3DCOLOR_XRGB(0, 0, 255), },
-            { 650.0f, 500.0f, 0.5f, 1.0f, D3DCOLOR_XRGB(0, 255, 0), },
-            { 150.0f, 500.0f, 0.5f, 1.0f, D3DCOLOR_XRGB(255, 0, 0), },
+            { 100.0f, 700.0f, 0.0f, 1.0f, D3DCOLOR_XRGB(0, 0, 255), },
+            { 100.0f, 100.0f, 0.0f, 1.0f, D3DCOLOR_XRGB(255, 0, 0), },
+            { 700.0f, 700.0f, 0.0f, 1.0f, D3DCOLOR_XRGB(0, 255, 0), },
+            { 700.0f, 100.0f, 0.0f, 1.0f, D3DCOLOR_XRGB(0, 255, 255), },
+            { 100.0f, 700.0f, 0.0f, 1.0f, D3DCOLOR_XRGB(0, 0, 255), },
+            { 700.0f, 700.0f, 0.0f, 1.0f, D3DCOLOR_XRGB(0, 255, 0), },
+            { 100.0f, 100.0f, 0.0f, 1.0f, D3DCOLOR_XRGB(255, 0, 0), },
+            { 700.0f, 100.0f, 0.0f, 1.0f, D3DCOLOR_XRGB(0, 255, 255), }
         };
 
-        // create a vertex buffer interface called v_buffer
-        pDevice->CreateVertexBuffer(3*sizeof(CUSTOMVERTEX),
-            0,
-            CUSTOMFVF,
-            D3DPOOL_MANAGED,
-            &pVB,
-            NULL);
+        // create a vertex buffer interface called i_buffer
+        pDevice->CreateVertexBuffer(8*sizeof(CUSTOMVERTEX),    // change to 4, instead of 3
+        0,
+        CUSTOMFVF,
+        D3DPOOL_MANAGED,
+        &pVB,
+        NULL);
 
         VOID* pVoid;    // a void pointer
 
         // lock v_buffer and load the vertices into it
         pVB->Lock(0, 0, (void**)&pVoid, 0);
-        memcpy(pVoid, vertices, sizeof(vertices));
+        memcpy(pVoid, vertices,sizeof(vertices));
         pVB->Unlock();
 
 
@@ -142,7 +147,8 @@ private:
         pDevice->SetStreamSource(0, pVB, 0, sizeof(CUSTOMVERTEX));
 
         // copy the vertex buffer to the back buffer
-        pDevice->DrawPrimitive(D3DPT_TRIANGLELIST, 0, 1);
+        pDevice->DrawPrimitive(D3DPT_LINELIST, 0, 4);
+        //pDevice->DrawPrimitive(D3DPT_LINESTRIP, 0, 4);
 
         pDevice->EndScene();
         pDevice->Present(NULL,NULL,NULL,NULL);

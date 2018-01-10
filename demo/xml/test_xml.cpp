@@ -35,9 +35,10 @@ int main()
     parser.parse("<![CDATA[");
 
     parser.parse("<!def");
-    
+
     parser.parse("<product id=100 cc=aa>Cloth</product>");
 
+    printf("Press any key to continue...");
     getchar();
     return 0;
 }

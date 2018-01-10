@@ -139,6 +139,7 @@ SUBDIRS = \
           base64      \
           pen         \
           color       \
+		  dshow      \
 
 #
 all:

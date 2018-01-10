@@ -6,6 +6,8 @@ include $(TOPDIR)/make.inc
 
 #
 SUBDIRS = dxwin     \
+          dxshape   \
+		  dxline    \
 
 #
 all:
