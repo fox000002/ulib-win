@@ -19,7 +19,7 @@ public:
 
 
     //
-    bool open(LPCSTR lpFilename = _T("defalut"));
+    bool open(LPCTSTR lpFilename = _T("defalut"));
     bool create(LPCTSTR lpFilename = _T("default"));
 
     bool isOpen() const;

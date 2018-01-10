@@ -43,7 +43,7 @@ bool UFile::isOpen() const
     return (m_hObj != INVALID_HANDLE_VALUE && m_hObj != 0 );
 }
 
-bool UFile::open( LPCSTR lpFilename /*= _T("defalut")*/ )
+bool UFile::open( LPCTSTR lpFilename /*= _T("defalut")*/ )
 {
     assert( !::IsBadStringPtr(lpFilename, -1) );
     lstrcpy(m_sFilename, lpFilename);
