@@ -286,6 +286,7 @@ inline void checked_delete(T * x)
 ///
 #include "uwarnings.h"
 #include "uhelpers.h"
+#include "uworkaround.h"
 
 #endif // HUYS_ULIB_H
 
