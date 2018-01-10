@@ -50,10 +50,13 @@ public:
         huys::URectI rect;
         this->getClientRect(rect);
 
-        graphics.DrawRectangle(&Pen(Color::Green, 2), rect.left()+10, rect.top()+10,
+		Pen p1(Color::Green, 2);
+		Pen p2(Color::Red, 1);
+		
+        graphics.DrawRectangle(&p1, rect.left()+10, rect.top()+10,
             rect.width()-20, rect.height()-20);
             
-        graphics.DrawRectangle(&Pen(Color::Red, 1), rect.left()+20, rect.top()+30,
+        graphics.DrawRectangle(&p2, rect.left()+20, rect.top()+30,
             rect.width()-40, rect.height()-50);
         
         SolidBrush brush(Color(255, 0, 255));
