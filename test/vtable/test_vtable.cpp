@@ -1,4 +1,5 @@
 #include <iostream>
+#include <windows.h>
 
 using std::cout;
 using std::endl;
@@ -103,6 +104,85 @@ int v_test()
     return 0;
 }
 
+namespace ComHook
+{
+/*	VTable
+	 ______
+	|f1
+	|______
+	|f2
+	|______
+	|f2
+	|______
+*/
+
+
+
+	class A
+	{
+	public:
+		A(){}
+		~A(){}
+		virtual void f1() { cout << "Founction f1 called" << endl; } 
+		virtual void f2() { cout << "Founction f2 called" << endl; }
+		virtual void f3() { cout << "Founction f3 called" << endl; }
+		void reset_f1();
+		void reset_f2();
+	private:
+		int n;
+	};
+
+	void A::reset_f1()
+	{
+		long** pplVrtable= (long**)(this); //取得虚函数表的指针
+		*pplVrtable = *pplVrtable +1;//将虚函数表的指针指向虚函数表第二个值。
+	}
+	
+	void A::reset_f2()
+	{
+		long** pplVrtable= (long**)(this);
+
+		HANDLE hProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, ::GetCurrentProcessId());
+
+		MEMORY_BASIC_INFORMATION mbi = {0};
+
+		if (VirtualQueryEx(hProcess, (LPVOID)(*pplVrtable), &mbi, sizeof(mbi)) != sizeof(mbi))
+			return;
+
+		DWORD dwOldProtect = 0;
+		if(!::VirtualProtectEx(hProcess, mbi.BaseAddress, 4, PAGE_EXECUTE_READWRITE, &dwOldProtect)) 
+			return;
+
+		(*pplVrtable)[1] = (*pplVrtable)[2];
+
+
+		DWORD dwTemp = 0;
+		::VirtualProtectEx(hProcess, mbi.BaseAddress, 4, dwOldProtect, &dwTemp);
+		CloseHandle(hProcess);
+	}
+
+	void test()
+	{
+		A* pA = new A;
+		pA->reset_f1();
+
+		cout << "Begin to call founction f1.\n" << endl;
+
+		pA->f1();
+		
+		A* pA2 = new A;
+		
+		pA2->reset_f2();
+		pA2->reset_f1();
+		
+		cout << "Begin to call founction f2.\n" << endl;
+		
+		pA2->f1();
+
+		delete pA;
+		delete pA2;
+	}
+}
 
 
 int main()
@@ -145,7 +225,11 @@ int main()
     ptr[0]();//
     
     cout << "--------------------------------------------" << endl;
-    v_test();
+    //v_test();
+	
+	cout << "--------------------------------------------" << endl;
+	ComHook::test();
+	
 
     return 0;
 }
