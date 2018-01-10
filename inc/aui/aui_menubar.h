@@ -100,7 +100,7 @@ public:
             dc.rectangle(rectItem);
         }
 
-        for (int i=0; i<_texts.size(); ++i)
+        for (unsigned int i=0; i<_texts.size(); ++i)
         {
             dc.textOutEx(5+i*50, 10, _texts.at(i));
         }
@@ -111,7 +111,7 @@ public:
     {
 
         LONG x = LOWORD(lParam);
-        LONG y = HIWORD(lParam);
+        //LONG y = HIWORD(lParam);
 
         int nPos =  x/50;
 

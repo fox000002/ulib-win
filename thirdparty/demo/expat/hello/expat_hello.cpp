@@ -173,7 +173,7 @@ static int ParseMMSCConf( XML_MMSCConfInfo& Conf, const char * FileName)
     memset(&Conf, 0, sizeof(XML_MMSCConfInfo));
 
     ifstream ifs(FileName, ios::in|ios::binary);
-    
+
     if(!ifs) return -1;
 
     char* buf;
@@ -244,6 +244,6 @@ int main()
 {
     XML_MMSCConfInfo conf;
     ParseMMSCConf(conf,"config.xml");
-    Serialize(Conf);
+    Serialize(conf);
     return 0;
 }

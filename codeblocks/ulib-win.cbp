@@ -85,6 +85,7 @@
 		<Unit filename="..\inc\umsg.h" />
 		<Unit filename="..\inc\uobject.h" />
 		<Unit filename="..\inc\upanel.h" />
+		<Unit filename="..\inc\upen.h" />
 		<Unit filename="..\inc\upicture.h" />
 		<Unit filename="..\inc\uprocessman.h" />
 		<Unit filename="..\inc\uprogressbar.h" />
@@ -136,6 +137,7 @@
 		<Unit filename="..\src\umsg.cpp" />
 		<Unit filename="..\src\uobject.cpp" />
 		<Unit filename="..\src\upanel.cpp" />
+		<Unit filename="..\src\upen.cpp" />
 		<Unit filename="..\src\upicture.cpp" />
 		<Unit filename="..\src\uprocessman.cpp" />
 		<Unit filename="..\src\uprogressbar.cpp" />

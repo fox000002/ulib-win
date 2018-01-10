@@ -29,7 +29,7 @@
 		<Project filename="customctrl.cbp">
 			<Depends filename="ulib-win.cbp" />
 		</Project>
-		<Project filename="debug.cbp" active="1" />
+		<Project filename="debug.cbp" />
 		<Project filename="edit.cbp" />
 		<Project filename="explorer.cbp">
 			<Depends filename="ulib-win.cbp" />
@@ -50,7 +50,7 @@
 		<Project filename="mdi.cbp">
 			<Depends filename="ulib-win.cbp" />
 		</Project>
-		<Project filename="menu.cbp">
+		<Project filename="menu.cbp" active="1">
 			<Depends filename="ulib-win.cbp" />
 		</Project>
 		<Project filename="msg.cbp">
