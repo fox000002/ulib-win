@@ -12,7 +12,7 @@
 
 BOOL isProgramUp(const TCHAR *name)
 {
-    char szProcessName[MAX_PATH] = {0};
+    TCHAR szProcessName[MAX_PATH] = {0};
 
     // Get the list of process identifiers.
     DWORD aProcesses[1024], cbNeeded, cProcesses;
@@ -110,7 +110,7 @@ BOOL startProgram( const TCHAR *cmdline,
 
 BOOL stopProgram(const TCHAR *name)
 {
-    char szProcessName[MAX_PATH] = "unknown";
+    TCHAR szProcessName[MAX_PATH] = _T("unknown");
 
     // Get the list of process identifiers.
     DWORD aProcesses[1024], cbNeeded, cProcesses;

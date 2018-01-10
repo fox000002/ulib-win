@@ -419,7 +419,7 @@ void __stdcall getOSVersion(char *osver)
     DWORD dwMinorVersion = 0;
     DWORD dwBuild = 0;
 
-    dwVersion = GetVersion();
+    dwVersion = ::GetVersion();
 
     // Get the Windows version.
 

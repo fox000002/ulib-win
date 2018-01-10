@@ -163,7 +163,7 @@
       <AdditionalIncludeDirectories>..\res;..\ico;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>odbc32.lib;odbccp32.lib;comctl32.lib;opengl32.lib;glu32.lib;msimg32.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>odbc32.lib;odbccp32.lib;comctl32.lib;opengl32.lib;glu32.lib;msimg32.lib;ws2_32.lib;psapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>Debug\libuwin_debug.vc10.dll</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -611,6 +611,7 @@
       <PreprocessorDefinitions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ClCompile Include="..\src\uregion.cpp" />
+    <ClCompile Include="..\src\usocket.cpp" />
     <ClCompile Include="..\src\usplashwnd.cpp" />
     <ClCompile Include="..\src\ustatic.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug-static|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -683,6 +684,7 @@
     <ClInclude Include="..\inc\upropsheet.h" />
     <ClInclude Include="..\inc\urebar.h" />
     <ClInclude Include="..\inc\uregion.h" />
+    <ClInclude Include="..\inc\usocket.h" />
     <ClInclude Include="..\inc\usplashwnd.h" />
     <ClInclude Include="..\inc\ustatic.h" />
     <ClInclude Include="..\inc\utabctrl.h" />

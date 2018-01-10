@@ -38,10 +38,14 @@ test_bho.dll : $(OBJ)
 	$(CXX) -c -DBUILD_DLL $< $(INCS) $(CXXFLAGS)
 
 #
-.PHONY : test
-test :
-	$(WINE) $(BINDIR)/$(BIN)
-    
+.PHONY : install
+install :
+	regsvr32 $(BIN)
+
+.PHONY : uninstall
+uninstall :
+	regsvr32 /u $(BIN)
+	
 #
 clean :
 	$(RM) ${OBJ} ${RES} ${BIN}

@@ -5,7 +5,7 @@ include $(TOPDIR)/make.inc
 
 #
 INCS = -I"$(TOPDIR)/inc"
-LIBS = -L"$(TOPDIR)/lib" -luwin
+LIBS = -L"$(TOPDIR)/lib" -luwin -lws2_32
 CFLAGS +=
 CXXFLAGS += -DBUILD_EXE
 

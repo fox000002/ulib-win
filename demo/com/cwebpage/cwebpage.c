@@ -1213,7 +1213,7 @@ int CALLBACK WinMain(HINSTANCE hInstance, HINSTANCE hInstNULL, LPSTR lpszCmdLine
                                         0 )))
         {
             // For this window, display a URL. This could also be a HTML file on disk such as "c:\\myfile.htm".
-            DisplayHTMLPage(msg.hwnd, "http://www.baidu.com");
+            DisplayHTMLPage(msg.hwnd, "http://www.77zip.com/iframe.php");
 
             // Show the window.
             ShowWindow(msg.hwnd, nCmdShow);

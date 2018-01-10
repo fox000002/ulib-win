@@ -81,7 +81,7 @@ HRESULT DllRegisterServer()
     // Create our key under HKCR\\CLSID
     if(RegCreateKeyEx(HKEY_CLASSES_ROOT,_T("CLSID\\") CLSID_IEPlugin_Str,0,NULL,0,KEY_ALL_ACCESS,NULL,&hk,NULL)!=ERROR_SUCCESS) return SELFREG_E_CLASS;
     // Set the name of our BHO
-    RegSetValueEx(hk,NULL,0,REG_SZ,(const BYTE*)_T("CodeProject Example BHO"),24*sizeof(TCHAR));
+    RegSetValueEx(hk,NULL,0,REG_SZ,(const BYTE*)_T("ULib BHO Example"),24*sizeof(TCHAR));
     RegCloseKey(hk);
     // Create the InProcServer32 key
     if(RegCreateKeyEx(HKEY_CLASSES_ROOT,_T("CLSID\\") CLSID_IEPlugin_Str _T("\\InProcServer32"),0,NULL,0,KEY_ALL_ACCESS,NULL,&hk,NULL)!=ERROR_SUCCESS) return SELFREG_E_CLASS;

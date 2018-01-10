@@ -244,8 +244,5 @@ int main()
     stree.inorder(printTree);
     cout << endl;
 
-    cout << "Press any key to continue...";
-    cin.ignore();
-
     return 0;
 }
