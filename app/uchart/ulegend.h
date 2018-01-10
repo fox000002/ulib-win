@@ -4,7 +4,9 @@
 class ULegend
 {
 public:
+	ULegend();
 
+	~ULegend();
 private:
 
 };

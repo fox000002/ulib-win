@@ -95,7 +95,19 @@ SOURCE=..\app\uchart\test_chart.cpp
 # End Source File
 # Begin Source File
 
+SOURCE=..\app\uchart\uaxis.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\app\uchart\ubar.cpp
+# End Source File
+# Begin Source File
+
 SOURCE=..\app\uchart\uchart.cpp
+# End Source File
+# Begin Source File
+
+SOURCE=..\app\uchart\ulegend.cpp
 # End Source File
 # End Group
 # Begin Group "Header Files"
@@ -104,6 +116,14 @@ SOURCE=..\app\uchart\uchart.cpp
 # Begin Source File
 
 SOURCE=..\app\uchart\resource.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\app\uchart\uaxis.h
+# End Source File
+# Begin Source File
+
+SOURCE=..\app\uchart\ubar.h
 # End Source File
 # Begin Source File
 

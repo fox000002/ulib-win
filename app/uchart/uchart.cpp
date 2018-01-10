@@ -182,7 +182,7 @@ public:
         ::TextOut(hdc, 60, 200, desc, lstrlen(desc));
     }
 
-    BOOL onPreRegisterWindowClass(huys::UWindowClass &uwc)
+    LRESULT onPreRegisterWindowClass(huys::UWindowClass &uwc)
     {
         uwc.setBKBrush((HBRUSH)::GetStockObject(LTGRAY_BRUSH));
         return UBaseWindow::onPreRegisterWindowClass(uwc);

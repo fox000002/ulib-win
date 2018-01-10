@@ -115,7 +115,7 @@ public:
         }
     }
 
-    BOOL onPreRegisterWindowClass(huys::UWindowClass &uwc)
+    LRESULT onPreRegisterWindowClass(huys::UWindowClass &uwc)
     {
         uwc.setBKBrush((HBRUSH)::GetStockObject(LTGRAY_BRUSH));
         return UBaseWindow::onPreRegisterWindowClass(uwc);

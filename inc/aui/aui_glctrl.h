@@ -56,7 +56,7 @@ public:
         this->killTimer(timer_id);
     }
 
-    BOOL onPreRegisterWindowClass(huys::UWindowClass &uwc)
+    LRESULT onPreRegisterWindowClass(huys::UWindowClass &uwc)
     {
         uwc.setStyles(CS_OWNDC);
         return FALSE;

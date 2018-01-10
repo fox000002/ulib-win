@@ -29,13 +29,13 @@ public:
         setTitle(_T("OpenGL Window"));
     }
 
-    BOOL onPreRegisterWindowClass(huys::UWindowClass &uwc)
+    LRESULT onPreRegisterWindowClass(huys::UWindowClass &uwc)
     {
         uwc.setStyles(CS_OWNDC);
         return FALSE;
     }
 
-    BOOL onPreCreateWindow()
+    LRESULT onPreCreateWindow()
     {
         if (IDYES == showYesNoMsgbox(_T("Fullscreen?"), _T("Start Fullscreen?")))
         {
