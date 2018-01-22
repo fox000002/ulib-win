@@ -48,7 +48,7 @@ Useful macros, functions and classes for windows
               ,'    .'            `.               \          `. \
             ,'   .'                 `.              )          ) (__.
           ,'   (                      `.            )          `."""'
-      _.-'    __)                       `.         .  LGB
+      _.-'    __)                       `.         .
      `""'""                               `"""""""
 
 
